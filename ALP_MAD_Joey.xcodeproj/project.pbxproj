@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		F9FFDAF02DDF082500A44214 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9FFDAEF2DDF082500A44214 /* Launch Screen.storyboard */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		3F2B2E212DDEB9EF00956565 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +31,7 @@
 		3F2B2E132DDEB9ED00956565 /* ALP_MAD_Joey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ALP_MAD_Joey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F2B2E202DDEB9EF00956565 /* ALP_MAD_JoeyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ALP_MAD_JoeyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F2B2E2A2DDEB9EF00956565 /* ALP_MAD_JoeyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ALP_MAD_JoeyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9FFDAEF2DDF082500A44214 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -75,6 +80,7 @@
 		3F2B2E0A2DDEB9ED00956565 = {
 			isa = PBXGroup;
 			children = (
+				F9FFDAEF2DDF082500A44214 /* Launch Screen.storyboard */,
 				3F2B2E152DDEB9ED00956565 /* ALP_MAD_Joey */,
 				3F2B2E232DDEB9EF00956565 /* ALP_MAD_JoeyTests */,
 				3F2B2E2D2DDEB9EF00956565 /* ALP_MAD_JoeyUITests */,
@@ -212,6 +218,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F9FFDAF02DDF082500A44214 /* Launch Screen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
