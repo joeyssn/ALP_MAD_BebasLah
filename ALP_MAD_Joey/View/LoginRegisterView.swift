@@ -25,11 +25,27 @@ struct LoginRegisterView: View {
                     .ignoresSafeArea()
                     .frame(width: 300, height: 300)
 
-                // Title
-                Text("Welcome to Lunaris")
-                    .font(.system(size: 35, weight: .bold))
-                    .foregroundColor(.white)
-                    .padding(.bottom, 20)
+                HStack(spacing: 0) {
+                    Text("Welcome to ")
+                        .font(.system(size: 35, weight: .bold))
+                        .foregroundColor(.white)
+
+                    Text("Lunaris")
+                        .font(.system(size: 35, weight: .bold))
+                        .overlay(
+                            LinearGradient(
+                                colors: [.white, .purple],
+                                startPoint: .leading,
+                                endPoint: .trailing
+                            )
+                            .mask(
+                                Text("Lunaris")
+                                    .font(.system(size: 35, weight: .bold))
+                            )
+                        )
+                }
+                .padding(.bottom, 20)
+
 
                 // Username
                 ZStack(alignment: .leading) {

@@ -9,7 +9,7 @@ import Foundation
 
 
 struct UserModel: Identifiable, Codable {
-    var id: UUID()
+    var id = UUID()
     var userbane: String
     var password: String
 }
