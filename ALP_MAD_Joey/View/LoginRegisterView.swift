@@ -1,0 +1,83 @@
+//
+//  LoginRegisterView.swift
+//  ALP_MAD_Joey
+//
+//  Created by student on 22/05/25.
+//
+
+import SwiftUI
+
+struct LoginRegisterView: View {
+    @State private var username = ""
+    @State private var password = ""
+    @State private var isRegistering = false
+
+    var body: some View {
+        ZStack {
+            Image("Login")
+                .resizable()
+                .ignoresSafeArea()
+                .scaledToFill()
+
+            VStack {
+                Image("Logo")
+                    .resizable()
+                    .ignoresSafeArea()
+                    .frame(width: 300, height: 300)
+
+                // Title
+                Text("Welcome to Lunaris")
+                    .font(.system(size: 35, weight: .bold))
+                    .foregroundColor(.white)
+                    .padding(.bottom, 20)
+
+                // Username
+                TextField("Username", text: $username)
+                    .padding()
+                    .background(Color.white.opacity(0.1))
+                    .cornerRadius(10)
+                    .foregroundColor(Color(red: 125/255, green: 125/255, blue: 125/255))
+                    .autocapitalization(.none)
+
+                // Password
+                SecureField("Password", text: $password)
+                    .padding()
+                    .background(Color.white.opacity(0.1))
+                    .cornerRadius(10)
+                    .foregroundColor(Color(red: 125/255, green: 125/255, blue: 125/255))
+                    .foregroundColor(Color.white)
+                    .padding(.bottom, 20)
+
+                // Login/Register Button
+                Button(action: {
+                    // Handle action
+                }) {
+                    Text(isRegistering ? "REGISTER" : "LOG IN")
+                        .fontWeight(.semibold)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.white)
+                        .foregroundColor(.black)
+                        .cornerRadius(10)
+                }
+
+                // Toggle Button
+                Button(action: {
+                    isRegistering.toggle()
+                }) {
+                    Text(isRegistering
+                         ? "Already have an account? Log in"
+                         : "Don't have an account? Register")
+                        .font(.footnote)
+                        .foregroundColor(.white.opacity(0.7))
+                }
+                .padding(.top, 10)
+            }
+            .padding(.horizontal, 20)
+        }
+    }
+}
+
+#Preview {
+    LoginRegisterView()
+}
