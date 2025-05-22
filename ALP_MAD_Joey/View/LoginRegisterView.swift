@@ -32,21 +32,37 @@ struct LoginRegisterView: View {
                     .padding(.bottom, 20)
 
                 // Username
-                TextField("Username", text: $username)
-                    .padding()
-                    .background(Color.white.opacity(0.1))
-                    .cornerRadius(10)
-                    .foregroundColor(Color(red: 125/255, green: 125/255, blue: 125/255))
-                    .autocapitalization(.none)
+                ZStack(alignment: .leading) {
+                    if username.isEmpty {
+                        Text("Username")
+                            .foregroundColor(.gray)
+                    }
+
+                    TextField("", text: $username)
+                        .foregroundColor(.white)
+                        .accentColor(Color(red: 125/255, green: 125/255, blue: 125/255))
+                        .autocapitalization(.none)
+                }
+                .padding()
+                .background(Color.white.opacity(0.1))
+                .cornerRadius(10)
 
                 // Password
-                SecureField("Password", text: $password)
-                    .padding()
-                    .background(Color.white.opacity(0.1))
-                    .cornerRadius(10)
-                    .foregroundColor(Color(red: 125/255, green: 125/255, blue: 125/255))
-                    .foregroundColor(Color.white)
-                    .padding(.bottom, 20)
+                ZStack(alignment: .leading) {
+                    if password.isEmpty {
+                        Text("Password")
+                            .foregroundColor(.gray)
+                    }
+
+                    SecureField("", text: $password)
+                        .foregroundColor(.white)
+                        .accentColor(Color(red: 125/255, green: 125/255, blue: 125/255))
+                }
+                .padding()
+                .background(Color.white.opacity(0.1))
+                .cornerRadius(10)
+                .padding(.bottom, 20)
+
 
                 // Login/Register Button
                 Button(action: {
@@ -59,6 +75,7 @@ struct LoginRegisterView: View {
                         .background(Color.white)
                         .foregroundColor(.black)
                         .cornerRadius(10)
+                        .padding(.bottom, 24)
                 }
 
                 // Toggle Button
