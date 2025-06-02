@@ -8,25 +8,34 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @Environment(\.presentationMode) var presentationMode
+    
     var body: some View {
         ZStack {
             Image("Login")
                 .resizable()
                 .scaledToFill()
                 .ignoresSafeArea()
-
+            
             VStack(spacing: 0) {
                 HStack {
-
+                    Button(action: {
+                        presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Image(systemName: "chevron.left")
+                            .foregroundColor(.white)
+                            .font(.title2)
+                    }
+                    
                     Spacer()
-
+                    
                     Text("Profile")
                         .foregroundColor(.white)
                         .font(.title2)
                         .fontWeight(.semibold)
-
+                    
                     Spacer()
-
+                    
                     Button(action: {}) {
                         Image(systemName: "pencil")
                             .foregroundColor(.white)
@@ -36,7 +45,7 @@ struct ProfileView: View {
                 .padding(.horizontal)
                 .padding(.top, 50)
                 .padding(.bottom, 30)
-
+                
                 ScrollView {
                     VStack(spacing: 30) {
                         VStack(spacing: 16) {
@@ -44,32 +53,30 @@ struct ProfileView: View {
                                 Circle()
                                     .fill(
                                         LinearGradient(
-                                            gradient: Gradient(colors: [
-                                                Color.purple, Color.blue,
-                                            ]),
+                                            gradient: Gradient(colors: [Color.purple, Color.blue]),
                                             startPoint: .topLeading,
                                             endPoint: .bottomTrailing
                                         )
                                     )
                                     .frame(width: 120, height: 120)
-
+                                
                                 Image(systemName: "person.fill")
                                     .font(.system(size: 50))
                                     .foregroundColor(.white)
                             }
-
+                            
                             VStack(spacing: 4) {
                                 Text("Calvin Laiman")
                                     .foregroundColor(.white)
                                     .font(.title)
                                     .fontWeight(.bold)
-
+                                
                                 Text("Meditation Enthusiast")
                                     .foregroundColor(.white.opacity(0.7))
                                     .font(.subheadline)
                             }
                         }
-
+                        
                         HStack(spacing: 30) {
                             VStack(spacing: 8) {
                                 Text("15")
@@ -80,11 +87,11 @@ struct ProfileView: View {
                                     .foregroundColor(.white.opacity(0.7))
                                     .font(.caption)
                             }
-
+                            
                             Rectangle()
                                 .fill(Color.white.opacity(0.3))
                                 .frame(width: 1, height: 40)
-
+                            
                             VStack(spacing: 8) {
                                 Text("42")
                                     .foregroundColor(.white)
@@ -94,11 +101,11 @@ struct ProfileView: View {
                                     .foregroundColor(.white.opacity(0.7))
                                     .font(.caption)
                             }
-
+                            
                             Rectangle()
                                 .fill(Color.white.opacity(0.3))
                                 .frame(width: 1, height: 40)
-
+                            
                             VStack(spacing: 8) {
                                 Text("8h 30m")
                                     .foregroundColor(.white)
@@ -110,7 +117,7 @@ struct ProfileView: View {
                             }
                         }
                         .padding(.horizontal)
-
+                        
                         VStack(spacing: 20) {
                             ProfileMenuItem(
                                 icon: "bell.fill",
@@ -123,25 +130,25 @@ struct ProfileView: View {
                                 title: "Favorites",
                                 subtitle: "Your liked meditations"
                             )
-
+                            
                             ProfileMenuItem(
                                 icon: "clock.fill",
                                 title: "History",
                                 subtitle: "Previous sessions"
                             )
-
+                            
                             ProfileMenuItem(
                                 icon: "chart.bar.fill",
                                 title: "Progress",
                                 subtitle: "Track your journey"
                             )
-
+                            
                             ProfileMenuItem(
                                 icon: "questionmark.circle.fill",
                                 title: "Help & Support",
                                 subtitle: "Get assistance"
                             )
-
+                            
                             ProfileMenuItem(
                                 icon: "info.circle.fill",
                                 title: "About",
@@ -149,11 +156,10 @@ struct ProfileView: View {
                             )
                         }
                         .padding(.horizontal)
-
+                        
+                        // Sign Out Button
                         HStack {
-                            Image(
-                                systemName: "rectangle.portrait.and.arrow.right"
-                            )
+                            Image(systemName: "rectangle.portrait.and.arrow.right")
                             Text("Sign Out")
                         }
                         .foregroundColor(.red)
@@ -165,20 +171,18 @@ struct ProfileView: View {
                                 .fill(Color.white.opacity(0.1))
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 12)
-                                        .stroke(
-                                            Color.red.opacity(0.5),
-                                            lineWidth: 1
-                                        )
+                                        .stroke(Color.red.opacity(0.5), lineWidth: 1)
                                 )
                         )
                         .padding(.horizontal)
                         .padding(.top, 20)
-
+                        
                         Spacer(minLength: 100)
                     }
                 }
             }
         }
+        .navigationBarHidden(true)
     }
 }
 
@@ -186,27 +190,27 @@ struct ProfileMenuItem: View {
     let icon: String
     let title: String
     let subtitle: String
-
+    
     var body: some View {
         HStack(spacing: 16) {
             Image(systemName: icon)
                 .foregroundColor(.purple)
                 .font(.title2)
                 .frame(width: 24)
-
+            
             VStack(alignment: .leading, spacing: 2) {
                 Text(title)
                     .foregroundColor(.white)
                     .font(.headline)
                     .fontWeight(.medium)
-
+                
                 Text(subtitle)
                     .foregroundColor(.white.opacity(0.7))
                     .font(.subheadline)
             }
-
+            
             Spacer()
-
+            
             Image(systemName: "chevron.right")
                 .foregroundColor(.white.opacity(0.5))
                 .font(.footnote)
