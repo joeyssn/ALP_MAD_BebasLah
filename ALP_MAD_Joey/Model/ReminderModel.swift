@@ -11,6 +11,6 @@ struct ReminderModel: Identifiable,Codable {
     var id = UUID()
     var userID = UUID()
     var time :  Int
-    var isActive: Date
+    var isActive: Bool
     var reminderText: String
 }
