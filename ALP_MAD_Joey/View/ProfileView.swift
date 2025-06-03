@@ -119,112 +119,133 @@ struct ProfileView: View {
                         .padding(.horizontal)
                         
                         VStack(spacing: 20) {
-                            ProfileMenuItem(
-                                icon: "bell.fill",
-                                title: "Notifications",
-                                subtitle: "Reminder settings"
-                            )
+                            VStack(spacing: 20) {
+                                NavigationLink(destination: NotificationSettingsView()) {
+                                    ProfileMenuItem(
+                                        icon: "bell.fill",
+                                        title: "Notifications",
+                                        subtitle: "Reminder settings"
+                                    )
+                                }
+                                .buttonStyle(PlainButtonStyle()) // Makes the whole area tappable without default styling
+                                
+                                NavigationLink(destination: Text("Favorites View")) {
+                                    ProfileMenuItem(
+                                        icon: "heart.fill",
+                                        title: "Favorites",
+                                        subtitle: "Your liked meditations"
+                                    )
+                                }
+                                .buttonStyle(PlainButtonStyle())
+                                
+                                NavigationLink(destination: Text("History View")) {
+                                    ProfileMenuItem(
+                                        icon: "clock.fill",
+                                        title: "History",
+                                        subtitle: "Previous sessions"
+                                    )
+                                }
+                                .buttonStyle(PlainButtonStyle())
+                                
+                                NavigationLink(destination: Text("Progress View")) {
+                                    ProfileMenuItem(
+                                        icon: "chart.bar.fill",
+                                        title: "Progress",
+                                        subtitle: "Track your journey"
+                                    )
+                                }
+                                .buttonStyle(PlainButtonStyle())
+                                
+                                NavigationLink(destination: Text("Help & Support View")) {
+                                    ProfileMenuItem(
+                                        icon: "questionmark.circle.fill",
+                                        title: "Help & Support",
+                                        subtitle: "Get assistance"
+                                    )
+                                }
+                                .buttonStyle(PlainButtonStyle())
+                                
+                                NavigationLink(destination: AboutPhoneView()) {
+                                    ProfileMenuItem(
+                                        icon: "info.circle.fill",
+                                        title: "About",
+                                        subtitle: "App information"
+                                    )
+                                }
+                                .buttonStyle(PlainButtonStyle())
+                            }
+                            .padding(.horizontal)
                             
-                            ProfileMenuItem(
-                                icon: "heart.fill",
-                                title: "Favorites",
-                                subtitle: "Your liked meditations"
-                            )
                             
-                            ProfileMenuItem(
-                                icon: "clock.fill",
-                                title: "History",
-                                subtitle: "Previous sessions"
+                            // Sign Out Button
+                            HStack {
+                                Image(systemName: "rectangle.portrait.and.arrow.right")
+                                Text("Sign Out")
+                            }
+                            .foregroundColor(.red)
+                            .font(.headline)
+                            .frame(maxWidth: .infinity)
+                            .frame(height: 50)
+                            .background(
+                                RoundedRectangle(cornerRadius: 12)
+                                    .fill(Color.white.opacity(0.1))
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .stroke(Color.red.opacity(0.5), lineWidth: 1)
+                                    )
                             )
+                            .padding(.horizontal)
+                            .padding(.top, 20)
                             
-                            ProfileMenuItem(
-                                icon: "chart.bar.fill",
-                                title: "Progress",
-                                subtitle: "Track your journey"
-                            )
-                            
-                            ProfileMenuItem(
-                                icon: "questionmark.circle.fill",
-                                title: "Help & Support",
-                                subtitle: "Get assistance"
-                            )
-                            
-                            ProfileMenuItem(
-                                icon: "info.circle.fill",
-                                title: "About",
-                                subtitle: "App information"
-                            )
+                            Spacer(minLength: 100)
                         }
-                        .padding(.horizontal)
-                        
-                        // Sign Out Button
-                        HStack {
-                            Image(systemName: "rectangle.portrait.and.arrow.right")
-                            Text("Sign Out")
-                        }
-                        .foregroundColor(.red)
-                        .font(.headline)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 50)
-                        .background(
-                            RoundedRectangle(cornerRadius: 12)
-                                .fill(Color.white.opacity(0.1))
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 12)
-                                        .stroke(Color.red.opacity(0.5), lineWidth: 1)
-                                )
-                        )
-                        .padding(.horizontal)
-                        .padding(.top, 20)
-                        
-                        Spacer(minLength: 100)
                     }
                 }
             }
+            .navigationBarHidden(true)
         }
-        .navigationBarHidden(true)
     }
-}
-
-struct ProfileMenuItem: View {
-    let icon: String
-    let title: String
-    let subtitle: String
     
-    var body: some View {
-        HStack(spacing: 16) {
-            Image(systemName: icon)
-                .foregroundColor(.purple)
-                .font(.title2)
-                .frame(width: 24)
-            
-            VStack(alignment: .leading, spacing: 2) {
-                Text(title)
-                    .foregroundColor(.white)
-                    .font(.headline)
-                    .fontWeight(.medium)
+    struct ProfileMenuItem: View {
+        let icon: String
+        let title: String
+        let subtitle: String
+        
+        var body: some View {
+            HStack(spacing: 16) {
+                Image(systemName: icon)
+                    .foregroundColor(.purple)
+                    .font(.title2)
+                    .frame(width: 24)
                 
-                Text(subtitle)
-                    .foregroundColor(.white.opacity(0.7))
-                    .font(.subheadline)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(title)
+                        .foregroundColor(.white)
+                        .font(.headline)
+                        .fontWeight(.medium)
+                    
+                    Text(subtitle)
+                        .foregroundColor(.white.opacity(0.7))
+                        .font(.subheadline)
+                }
+                
+                Spacer()
+                
+                Image(systemName: "chevron.right")
+                    .foregroundColor(.white.opacity(0.5))
+                    .font(.footnote)
             }
-            
-            Spacer()
-            
-            Image(systemName: "chevron.right")
-                .foregroundColor(.white.opacity(0.5))
-                .font(.footnote)
+            .padding(.horizontal, 20)
+            .padding(.vertical, 16)
+            .background(
+                RoundedRectangle(cornerRadius: 12)
+                    .fill(Color.white.opacity(0.1))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12)
+                            .stroke(Color.white.opacity(0.2), lineWidth: 1)
+                    )
+            )
         }
-        .padding(.horizontal, 20)
-        .padding(.vertical, 16)
-        .background(
-            RoundedRectangle(cornerRadius: 12)
-                .fill(Color.white.opacity(0.1))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 12)
-                        .stroke(Color.white.opacity(0.2), lineWidth: 1)
-                )
-        )
     }
 }
 

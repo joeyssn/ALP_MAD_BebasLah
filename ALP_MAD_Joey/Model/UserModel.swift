@@ -10,12 +10,14 @@ import SwiftData
 
 @Model
 class UserModel {
-    var id: UUID
+    @Attribute(.unique) var userId: Int? = nil
     var username: String
     var password: String
-
-    init(id: UUID = UUID(), username: String, password: String) {
-        self.id = id
+    @Relationship var moods: [MoodModel] = []
+    @Relationship var reminder: [ReminderModel] = []
+    @Relationship var meditation: [MeditateSessionModel] = []
+    init(userId: Int, username: String, password: String) {
+        self.userId = userId
         self.username = username
         self.password = password
     }

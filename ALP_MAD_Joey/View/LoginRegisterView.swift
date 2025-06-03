@@ -10,8 +10,9 @@ import SwiftData
 
 struct LoginRegisterView: View {
     @Environment(\.modelContext) private var context
-    @State private var viewModel: AuthViewModel?
-    
+    @EnvironmentObject var sessionController: SessionController
+    @EnvironmentObject var userController: UserController
+
     @State private var username = ""
     @State private var password = ""
     @State private var isRegistering = false
@@ -115,22 +116,29 @@ struct LoginRegisterView: View {
             }
             .padding(.horizontal, 20)
         }
-        .onAppear {
-            viewModel = AuthViewModel(context: context)
-        }
         .fullScreenCover(isPresented: $isLoggedIn) {
             HomeView()
         }
     }
 
     private func handleAuthAction() {
-        guard let viewModel = viewModel else { return }
-
         do {
             if isRegistering {
-                try viewModel.register(username: username, password: password)
+                let success = try userController.register(username: username, password: password)
+                if !success {
+                    errorMessage = "Username already exists."
+                    return
+                }
+                // Optional: auto-login after registering
+                if let user = try userController.login(username: username, password: password) {
+                    sessionController.currentUser = user
+                }
             } else {
-                try viewModel.login(username: username, password: password)
+                guard let user = try userController.login(username: username, password: password) else {
+                    errorMessage = "Invalid username or password."
+                    return
+                }
+                sessionController.currentUser = user
             }
 
             errorMessage = ""
@@ -139,8 +147,8 @@ struct LoginRegisterView: View {
             errorMessage = error.localizedDescription
         }
     }
-}
 
+}
 
 #Preview {
     LoginRegisterView()
