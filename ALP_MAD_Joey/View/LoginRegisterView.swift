@@ -6,11 +6,17 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct LoginRegisterView: View {
+    @Environment(\.modelContext) private var context
+    @State private var viewModel: AuthViewModel?
+    
     @State private var username = ""
     @State private var password = ""
     @State private var isRegistering = false
+    @State private var errorMessage = ""
+    @State private var isLoggedIn = false
 
     var body: some View {
         ZStack {
@@ -22,7 +28,6 @@ struct LoginRegisterView: View {
             VStack {
                 Image("Logo")
                     .resizable()
-                    .ignoresSafeArea()
                     .frame(width: 300, height: 300)
 
                 HStack(spacing: 0) {
@@ -46,7 +51,6 @@ struct LoginRegisterView: View {
                 }
                 .padding(.bottom, 20)
 
-
                 // Username
                 ZStack(alignment: .leading) {
                     if username.isEmpty {
@@ -56,7 +60,6 @@ struct LoginRegisterView: View {
 
                     TextField("", text: $username)
                         .foregroundColor(.white)
-                        .accentColor(Color(red: 125/255, green: 125/255, blue: 125/255))
                         .autocapitalization(.none)
                 }
                 .padding()
@@ -72,18 +75,21 @@ struct LoginRegisterView: View {
 
                     SecureField("", text: $password)
                         .foregroundColor(.white)
-                        .accentColor(Color(red: 125/255, green: 125/255, blue: 125/255))
                 }
                 .padding()
                 .background(Color.white.opacity(0.1))
                 .cornerRadius(10)
                 .padding(.bottom, 20)
 
+                if !errorMessage.isEmpty {
+                    Text(errorMessage)
+                        .foregroundColor(.red)
+                        .font(.footnote)
+                        .padding(.bottom, 8)
+                }
 
                 // Login/Register Button
-                Button(action: {
-                    // Handle action
-                }) {
+                Button(action: handleAuthAction) {
                     Text(isRegistering ? "REGISTER" : "LOG IN")
                         .fontWeight(.semibold)
                         .frame(maxWidth: .infinity)
@@ -97,6 +103,7 @@ struct LoginRegisterView: View {
                 // Toggle Button
                 Button(action: {
                     isRegistering.toggle()
+                    errorMessage = ""
                 }) {
                     Text(isRegistering
                          ? "Already have an account? Log in"
@@ -108,8 +115,32 @@ struct LoginRegisterView: View {
             }
             .padding(.horizontal, 20)
         }
+        .onAppear {
+            viewModel = AuthViewModel(context: context)
+        }
+        .fullScreenCover(isPresented: $isLoggedIn) {
+            HomeView()
+        }
+    }
+
+    private func handleAuthAction() {
+        guard let viewModel = viewModel else { return }
+
+        do {
+            if isRegistering {
+                try viewModel.register(username: username, password: password)
+            } else {
+                try viewModel.login(username: username, password: password)
+            }
+
+            errorMessage = ""
+            isLoggedIn = true
+        } catch {
+            errorMessage = error.localizedDescription
+        }
     }
 }
+
 
 #Preview {
     LoginRegisterView()
