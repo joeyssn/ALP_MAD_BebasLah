@@ -11,7 +11,11 @@ struct MoodView: View {
     @State private var selectedMood: MoodType = .normal
     @State private var pulseAnimation = false
     @State private var rotationAnimation = 0.0
+    @State private var navigateToMoodLog = false
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.modelContext) var modelContext
+    @EnvironmentObject var sessionController: SessionController
+    @EnvironmentObject var moodController: MoodController
 
     private let moods: [MoodType] = [.unhappy, .sad, .normal, .good, .happy]
 
@@ -217,11 +221,18 @@ struct MoodView: View {
                 Spacer()
 
                 Button(action: {
-                    let impactFeedback = UIImpactFeedbackGenerator(
-                        style: .medium
-                    )
+                    let impactFeedback = UIImpactFeedbackGenerator(style: .medium)
                     impactFeedback.impactOccurred()
 
+                    do {
+                        try moodController.logMood(
+                            moodName: selectedMood.title,
+                            for: sessionController.currentUser?.userId ?? -1
+                        )
+                        navigateToMoodLog = true
+                    } catch {
+                        print("Failed to log mood: \(error.localizedDescription)")
+                    }
                 }) {
                     HStack {
                         Image(systemName: "heart.fill")
@@ -262,8 +273,8 @@ struct MoodView: View {
                 .padding(.horizontal)
                 .padding(.bottom, 50)
             }
+            .navigationBarHidden(true)
         }
-        .navigationBarHidden(true)
     }
 }
 

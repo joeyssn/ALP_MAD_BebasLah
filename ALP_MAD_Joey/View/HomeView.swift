@@ -162,7 +162,7 @@ struct HomeView: View {
 #Preview {
     let dummyUser = UserModel(
         userId: 1,
-        username: "steven",
+        username: "Calvin",
         password: "123"
     )
     let dummySession = SessionController()

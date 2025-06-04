@@ -12,28 +12,35 @@ import SwiftUI
 struct ALP_MAD_JoeyApp: App {
     @StateObject private var session = SessionController()
     @StateObject private var userController: UserController
+    @StateObject private var moodController: MoodController
 
     var sharedModelContainer: ModelContainer
     init() {
         let schema = Schema([
-            UserModel.self
-                //            MeditateSessionModel.self,
-                //            MoodModel.self,
+            UserModel.self,
+            //            MeditateSessionModel.self,
+            MoodModel.self,
                 //            ReminderModel.self
         ])
         let config = ModelConfiguration(schema: schema)
         let container = try! ModelContainer(
-            for: schema, configurations: [config])
+            for: schema,
+            configurations: [config]
+        )
         sharedModelContainer = container
         // Initialize UserController with the container's main context
         _userController = StateObject(
-            wrappedValue: UserController(context: container.mainContext))
-
+            wrappedValue: UserController(context: container.mainContext)
+        )
+        _moodController = StateObject(
+            wrappedValue: MoodController(context: container.mainContext)
+        )
     }
     var body: some Scene {
         WindowGroup {
             StartView().environmentObject(session)
                 .environmentObject(userController)
+                .environmentObject(moodController)
                 .modelContainer(sharedModelContainer)
         }
     }
