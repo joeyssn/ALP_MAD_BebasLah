@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct MoodView: View {
     @State private var selectedMood: MoodType = .normal

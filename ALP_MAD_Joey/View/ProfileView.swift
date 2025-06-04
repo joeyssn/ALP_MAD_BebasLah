@@ -149,7 +149,7 @@ struct ProfileView: View {
                                     .buttonStyle(PlainButtonStyle())
 
                                     NavigationLink(
-                                        destination: Text("History View")
+                                        destination: MoodLogView()
                                     ) {
                                         ProfileMenuItem(
                                             icon: "clock.fill",

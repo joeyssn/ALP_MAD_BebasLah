@@ -162,7 +162,20 @@ struct MoodLogView: View {
             }
         }
         .navigationBarHidden(true)
-        .fullScreenCover(isPresented: $showMoodView) {
+        .fullScreenCover(
+            isPresented: $showMoodView,
+            onDismiss: {
+                do {
+                    moods = try moodController.getMoods(
+                        for: sessionController.currentUser?.userId ?? -1
+                    )
+                } catch {
+                    print(
+                        "Failed to fetch moods: \(error.localizedDescription)"
+                    )
+                }
+            }
+        ) {
             MoodView()
         }
         .onAppear {
@@ -176,15 +189,16 @@ struct MoodLogView: View {
         }
     }
 
-    func colorForMood(_ mood: String) -> Color {
-        switch mood.lowercased() {
-        case "unhappy": return .red
-        case "sad": return .blue
-        case "normal": return .purple
-        case "good": return .green
-        case "happy": return .yellow
-        default: return .gray
-        }
+}
+
+func colorForMood(_ mood: String) -> Color {
+    switch mood.lowercased() {
+    case "unhappy": return .red
+    case "sad": return .blue
+    case "normal": return .purple
+    case "good": return .green
+    case "happy": return .yellow
+    default: return .gray
     }
 }
 
