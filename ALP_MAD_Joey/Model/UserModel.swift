@@ -6,10 +6,19 @@
 //
 
 import Foundation
+import SwiftData
 
-
-struct UserModel: Identifiable, Codable {
-    var id = UUID()
-    var userbane: String
+@Model
+class UserModel {
+    @Attribute(.unique) var userId: Int? = nil
+    var username: String
     var password: String
+    @Relationship var moods: [MoodModel] = []
+    @Relationship var reminder: [ReminderModel] = []
+    @Relationship var meditation: [MeditateSessionModel] = []
+    init(userId: Int, username: String, password: String) {
+        self.userId = userId
+        self.username = username
+        self.password = password
+    }
 }
