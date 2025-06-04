@@ -195,29 +195,30 @@ struct ProfileView: View {
                                 .padding(.horizontal)
 
                                 // Sign Out Button
-                                HStack {
-                                    Image(
-                                        systemName:
-                                            "rectangle.portrait.and.arrow.right"
+                                Button(action: {
+                                    session.logout()
+                                }) {
+                                    HStack {
+                                        Image(systemName: "rectangle.portrait.and.arrow.right")
+                                        Text("Sign Out")
+                                    }
+                                    .foregroundColor(.red)
+                                    .font(.headline)
+                                    .frame(maxWidth: .infinity)
+                                    .frame(height: 50)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 12)
+                                            .fill(Color.white.opacity(0.1))
+                                            .overlay(
+                                                RoundedRectangle(cornerRadius: 12)
+                                                    .stroke(Color.red.opacity(0.5), lineWidth: 1)
+                                            )
                                     )
-                                    Text("Sign Out")
+                                    .padding(.horizontal)
+                                    .padding(.top, 20)
                                 }
-                                .foregroundColor(.red)
-                                .font(.headline)
-                                .frame(maxWidth: .infinity)
-                                .frame(height: 50)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 12)
-                                        .fill(Color.white.opacity(0.1))
-                                        .overlay(
-                                            RoundedRectangle(cornerRadius: 12)
-                                                .stroke(
-                                                    Color.red.opacity(0.5),
-                                                    lineWidth: 1)
-                                        )
-                                )
-                                .padding(.horizontal)
-                                .padding(.top, 20)
+                                .buttonStyle(PlainButtonStyle()) // keeps the button from using default blue style and highlight
+
 
                                 Spacer(minLength: 100)
                             }
