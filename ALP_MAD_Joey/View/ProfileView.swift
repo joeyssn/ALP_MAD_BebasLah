@@ -40,11 +40,11 @@ struct ProfileView: View {
 
                         Spacer()
 
-                        Button(action: {}) {
-                            Image(systemName: "pencil")
-                                .foregroundColor(.white)
-                                .font(.title2)
-                        }
+                        NavigationLink(destination: EditProfileView(user: user)) {
+                                                       Image(systemName: "pencil")
+                                                           .foregroundColor(.white)
+                                                           .font(.title2)
+                                                   }
                     }
                     .padding(.horizontal)
                     .padding(.top, 50)
