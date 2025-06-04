@@ -160,5 +160,14 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView()
+    let dummyUser = UserModel(
+        userId: 1,
+        username: "steven",
+        password: "123"
+    )
+    let dummySession = SessionController()
+    dummySession.login(user: dummyUser)
+    dummySession.login(user: dummyUser)
+    return HomeView().environmentObject(dummySession)
+        .modelContainer(for: [UserModel.self], inMemory: true)
 }
