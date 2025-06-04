@@ -8,25 +8,44 @@
 import SwiftUI
 
 struct SessionStartView: View {
+    @Environment(\.presentationMode) var presentationMode
     @State private var isSpread = false
     @State private var rotationAngle: Double = 0
-
+    @State private var isPaused = false
+    @State private var isLiked = false
+    let card: MeditationCardModel
+    
     var body: some View {
         ZStack {
             Color.black
                 .ignoresSafeArea()
 
             VStack {
+                HStack {
+                    Button(action: {
+                        presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Image(systemName: "chevron.left")
+                            .foregroundColor(.white)
+                            .font(.title2)
+                    }
+
+                    Spacer()
+
+                    Text("Session Started")
+                        .font(.system(size: 22))
+                        .fontWeight(.semibold)
+                        .foregroundStyle(Color.white)
+
+                    Spacer()
+                }
+                .padding(.horizontal)
+                .padding(.top, 10)
+                .padding(.bottom, 6)
                 VStack {
 
                     HStack {
-                        Text("Session Started")
-                            .font(.system(size: 22))
-                            .fontWeight(.semibold)
-                            .foregroundStyle(Color.white)
-                    }.padding(.vertical, 10)
-                    HStack {
-                        Text("Playing: Moonlight Mind")
+                        Text("Playing: \(card.title)")
                             .font(.system(size: 18))
                             .foregroundColor(Color.gray)
                     }
@@ -102,9 +121,40 @@ struct SessionStartView: View {
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 5)
-                
+                HStack(spacing: 12) {
+                    Button(action: {
+                        isPaused.toggle()
+                    }) {
+                        HStack {
+                            Image(systemName: isPaused ? "play.fill" : "pause.fill")
+                                .foregroundColor(.white)
+                                .font(.system(size: 20, weight: .bold))
+                            Text(isPaused ? "Resume" : "Pause")
+                                .foregroundColor(.white)
+                                .font(.system(size: 18, weight: .semibold))
+                        }
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 50)
+                        .background(Color(red: 103/255, green: 0/255, blue: 220/255))
+                        .cornerRadius(12)
+                    }
+
+                    Button(action: {
+                        isLiked.toggle()
+                    }) {
+                        Image(systemName: isLiked ? "heart.fill" : "heart")
+                            .foregroundColor(isLiked ? .red : .white)
+                            .frame(width: 50, height: 50)
+                            .background(Color(red: 103/255, green: 0/255, blue: 220/255))
+                            .cornerRadius(12)
+                    }
+                }
+                .padding(.top, 20)
+                .padding(.horizontal, 20)
+
                 Spacer()
             }
+            .navigationBarHidden(true)
         }
     }
 }
@@ -123,8 +173,15 @@ struct PetalShape: Shape {
 
         return path
     }
+    
 }
 
 #Preview {
-    SessionStartView()
+    SessionStartView(card: MeditationCardModel(
+        meditationCardId: 4,
+        imageName: "gambar4",
+        title: "Mountain Serenity",
+        med_description:
+            "Find stability and strength in mountain meditation."
+    ))
 }

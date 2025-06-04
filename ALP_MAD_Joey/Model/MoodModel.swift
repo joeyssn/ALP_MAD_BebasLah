@@ -6,7 +6,9 @@
 //
 
 import Foundation
+import SwiftData
 
+//@Model
 struct MoodModel: Identifiable, Codable {
     var id = UUID()
     var moodName: String

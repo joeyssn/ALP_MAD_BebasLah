@@ -6,9 +6,20 @@
 //
 
 import Foundation
+import SwiftData
 
-struct MeditationCardModel {
-    let imageName: String
-    let title: String
-    let description: String
+@Model
+class MeditationCardModel {
+    @Attribute(.unique) var meditationCardId: Int? = nil
+    var imageName: String
+    var title: String
+    var med_description: String
+    @Relationship var meditationSession: MeditateSessionModel?
+    
+    init(meditationCardId: Int, imageName: String, title: String, med_description: String) {
+        self.meditationCardId = meditationCardId
+        self.imageName = imageName
+        self.title = title
+        self.med_description = med_description
+    }
 }

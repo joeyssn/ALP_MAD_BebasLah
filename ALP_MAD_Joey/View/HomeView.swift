@@ -5,8 +5,8 @@
 //  Created by student on 22/05/25.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject var session: SessionController
@@ -21,27 +21,32 @@ struct HomeView: View {
 
     private let meditationCards = [
         MeditationCardModel(
+            meditationCardId: 1,
             imageName: "gambar1",
             title: "Moonlight Mind",
-            description:
+            med_description:
                 "A calming nighttime practice to release the day and embrace rest."
         ),
         MeditationCardModel(
+            meditationCardId: 2,
             imageName: "gambar2",
             title: "The Quiet Within",
-            description:
+            med_description:
                 "An introspective meditation to listen to the wisdom of your inner self."
         ),
         MeditationCardModel(
+            meditationCardId: 3,
             imageName: "gambar3",
             title: "Ocean Waves",
-            description:
+            med_description:
                 "Let the rhythm of waves guide you to peaceful tranquility."
         ),
         MeditationCardModel(
+            meditationCardId: 4,
             imageName: "gambar4",
             title: "Mountain Serenity",
-            description: "Find stability and strength in mountain meditation."
+            med_description:
+                "Find stability and strength in mountain meditation."
         ),
     ]
 
@@ -57,7 +62,7 @@ struct HomeView: View {
     private let days = ["S", "M", "T", "W", "T", "F", "S"]
 
     var body: some View {
-        if let user = session.currentUser{
+        if let user = session.currentUser {
             NavigationView {
                 ZStack(alignment: .top) {
                     Image("Login")
@@ -106,7 +111,9 @@ struct HomeView: View {
                                     )
                                     .foregroundColor(.white)
                                     .fontWeight(.bold)
-                                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                                    .clipShape(
+                                        RoundedRectangle(cornerRadius: 8)
+                                    )
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 8)
                                             .stroke(
@@ -139,8 +146,14 @@ struct HomeView: View {
                                     ],
                                     spacing: 16
                                 ) {
-                                    ForEach(meditationCards, id: \.title) { card in
-                                        MeditationCardView(card: card)
+                                    ForEach(meditationCards, id: \.title) {
+                                        card in
+                                        NavigationLink(
+                                            destination: SessionDetailView(
+                                                card: card)
+                                        ) {
+                                            MeditationCardView(card: card)
+                                        }
                                     }
                                 }
                                 .padding(.horizontal)
@@ -152,10 +165,10 @@ struct HomeView: View {
                 }
                 .navigationBarHidden(true)
             }
-        }else{
+        } else {
             Text("Current User Not Found")
         }
-        
+
     }
 }
 

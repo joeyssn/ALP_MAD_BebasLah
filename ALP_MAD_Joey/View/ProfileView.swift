@@ -47,7 +47,7 @@ struct ProfileView: View {
                         }
                     }
                     .padding(.horizontal)
-                    .padding(.top, 50)
+                    .padding(.top, 10)
                     .padding(.bottom, 30)
 
                     ScrollView {
