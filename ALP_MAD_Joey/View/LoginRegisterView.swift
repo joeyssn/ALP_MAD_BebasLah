@@ -17,7 +17,6 @@ struct LoginRegisterView: View {
     @State private var password = ""
     @State private var isRegistering = false
     @State private var errorMessage = ""
-    @State private var isLoggedIn = false
 
     var body: some View {
         ZStack {
@@ -116,9 +115,6 @@ struct LoginRegisterView: View {
             }
             .padding(.horizontal, 20)
         }
-        .fullScreenCover(isPresented: $isLoggedIn) {
-            HomeView()
-        }
     }
 
     private func handleAuthAction() {
@@ -129,7 +125,6 @@ struct LoginRegisterView: View {
                     errorMessage = "Username already exists."
                     return
                 }
-                // Optional: auto-login after registering
                 if let user = try userController.login(username: username, password: password) {
                     sessionController.currentUser = user
                 }
@@ -142,12 +137,10 @@ struct LoginRegisterView: View {
             }
 
             errorMessage = ""
-            isLoggedIn = true
         } catch {
             errorMessage = error.localizedDescription
         }
     }
-
 }
 
 #Preview {

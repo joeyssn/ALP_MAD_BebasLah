@@ -14,6 +14,7 @@ struct MoodLogView: View {
     @EnvironmentObject var sessionController: SessionController
     @EnvironmentObject var moodController: MoodController
     @State private var moods: [MoodModel] = []
+    @State private var showMoodView = false
 
     var body: some View {
         ZStack {
@@ -119,7 +120,9 @@ struct MoodLogView: View {
 
                     Spacer()
 
-                    NavigationLink(destination: MoodView()) {
+                    Button(action: {
+                        showMoodView = true
+                    }) {
                         HStack(spacing: 12) {
                             Image(systemName: "plus.circle.fill")
                                 .font(.title2)
@@ -154,11 +157,14 @@ struct MoodLogView: View {
                         )
                     }
                     .padding(.horizontal, 24)
-                    .padding(.bottom, 40)
+                    .padding(.bottom, 80)
                 }
             }
         }
         .navigationBarHidden(true)
+        .fullScreenCover(isPresented: $showMoodView) {
+            MoodView()
+        }
         .onAppear {
             do {
                 moods = try moodController.getMoods(

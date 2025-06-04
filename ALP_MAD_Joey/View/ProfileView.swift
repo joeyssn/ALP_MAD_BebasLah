@@ -9,7 +9,7 @@ import SwiftData
 import SwiftUI
 
 struct ProfileView: View {
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) private var dismiss
     @EnvironmentObject var session: SessionController
     @Environment(\.modelContext) private var context
 
@@ -20,10 +20,11 @@ struct ProfileView: View {
                     .resizable()
                     .scaledToFill()
                     .ignoresSafeArea()
+
                 VStack {
                     HStack {
                         Button(action: {
-                            presentationMode.wrappedValue.dismiss()
+                            dismiss()
                         }) {
                             Image(systemName: "chevron.left")
                                 .foregroundColor(.white)
@@ -56,9 +57,7 @@ struct ProfileView: View {
                                     Circle()
                                         .fill(
                                             LinearGradient(
-                                                gradient: Gradient(colors: [
-                                                    Color.purple, Color.blue,
-                                                ]),
+                                                gradient: Gradient(colors: [Color.purple, Color.blue]),
                                                 startPoint: .topLeading,
                                                 endPoint: .bottomTrailing
                                             )
@@ -125,20 +124,16 @@ struct ProfileView: View {
 
                             VStack(spacing: 20) {
                                 VStack(spacing: 20) {
-                                    NavigationLink(
-                                        destination: NotificationSettingsView()
-                                    ) {
+                                    NavigationLink(destination: NotificationSettingsView()) {
                                         ProfileMenuItem(
                                             icon: "bell.fill",
                                             title: "Notifications",
                                             subtitle: "Reminder settings"
                                         )
                                     }
-                                    .buttonStyle(PlainButtonStyle())  // Makes the whole area tappable without default styling
+                                    .buttonStyle(PlainButtonStyle())
 
-                                    NavigationLink(
-                                        destination: Text("Favorites View")
-                                    ) {
+                                    NavigationLink(destination: Text("Favorites View")) {
                                         ProfileMenuItem(
                                             icon: "heart.fill",
                                             title: "Favorites",
@@ -147,9 +142,7 @@ struct ProfileView: View {
                                     }
                                     .buttonStyle(PlainButtonStyle())
 
-                                    NavigationLink(
-                                        destination: MoodLogView()
-                                    ) {
+                                    NavigationLink(destination: MoodLogView()) {
                                         ProfileMenuItem(
                                             icon: "clock.fill",
                                             title: "History",
@@ -158,9 +151,7 @@ struct ProfileView: View {
                                     }
                                     .buttonStyle(PlainButtonStyle())
 
-                                    NavigationLink(
-                                        destination: Text("Progress View")
-                                    ) {
+                                    NavigationLink(destination: Text("Progress View")) {
                                         ProfileMenuItem(
                                             icon: "chart.bar.fill",
                                             title: "Progress",
@@ -169,9 +160,7 @@ struct ProfileView: View {
                                     }
                                     .buttonStyle(PlainButtonStyle())
 
-                                    NavigationLink(
-                                        destination: Text("Help & Support View")
-                                    ) {
+                                    NavigationLink(destination: Text("Help & Support View")) {
                                         ProfileMenuItem(
                                             icon: "questionmark.circle.fill",
                                             title: "Help & Support",
@@ -180,9 +169,7 @@ struct ProfileView: View {
                                     }
                                     .buttonStyle(PlainButtonStyle())
 
-                                    NavigationLink(
-                                        destination: AboutPhoneView()
-                                    ) {
+                                    NavigationLink(destination: AboutPhoneView()) {
                                         ProfileMenuItem(
                                             icon: "info.circle.fill",
                                             title: "About",
@@ -192,14 +179,13 @@ struct ProfileView: View {
                                     .buttonStyle(PlainButtonStyle())
                                 }
                                 .padding(.horizontal)
+
                                 Button(action: {
                                     session.logout()
                                 }) {
                                     HStack {
-                                        Image(
-                                            systemName:
-                                                "rectangle.portrait.and.arrow.right"
-                                        )
+                                        
+                                        Image(systemName: "rectangle.portrait.and.arrow.right")
                                         Text("Sign Out")
                                     }
                                     .foregroundColor(.red)
@@ -210,13 +196,8 @@ struct ProfileView: View {
                                         RoundedRectangle(cornerRadius: 12)
                                             .fill(Color.white.opacity(0.1))
                                             .overlay(
-                                                RoundedRectangle(
-                                                    cornerRadius: 12
-                                                )
-                                                .stroke(
-                                                    Color.red.opacity(0.5),
-                                                    lineWidth: 1
-                                                )
+                                                RoundedRectangle(cornerRadius: 12)
+                                                    .stroke(Color.red.opacity(0.5), lineWidth: 1)
                                             )
                                     )
                                 }
@@ -231,7 +212,6 @@ struct ProfileView: View {
                 .navigationBarHidden(true)
             }
         }
-
     }
 
     struct ProfileMenuItem: View {
@@ -276,6 +256,7 @@ struct ProfileView: View {
         }
     }
 }
+
 
 #Preview {
     ProfileView()
