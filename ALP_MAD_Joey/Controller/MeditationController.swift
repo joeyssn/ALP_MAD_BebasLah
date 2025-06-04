@@ -10,5 +10,11 @@ import SwiftData
 
 @MainActor
 class MeditationController: ObservableObject {
+    let context: ModelContext
+    
+    init(context: ModelContext) {
+        self.context = context
+    }
+    
     
 }
