@@ -10,6 +10,8 @@ import SwiftUI
 struct SessionDetailView: View {
     @Environment(\.presentationMode) var presentationMode
     let card: MeditationCardModel
+    @State private var showSessionStart = false
+
     private let meditationCards = [
         MeditationCardModel(
             meditationCardId: 1,
@@ -110,33 +112,29 @@ struct SessionDetailView: View {
                                 NavigationLink(destination: SessionDetailView(card: session)) {
                                     MeditationCardView(card: session)
                                 }
-                                .buttonStyle(PlainButtonStyle()) // Removes default link styling (optional)
+                                .buttonStyle(PlainButtonStyle())
                             }
                         }
 
 
-                        NavigationLink(
-                            destination:
-                                NavigationStack{
-                                    SessionStartView(card: card)
-                                }
-                            
-                        ) {
+                        Button(action: {
+                            showSessionStart = true
+                        }) {
                             Text("Start Meditating")
                                 .font(.headline)
                                 .fontWeight(.semibold)
                                 .foregroundColor(.white)
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 56)
-                                .background(
-                                    Color(
-                                        red: 103 / 255, green: 0 / 255,
-                                        blue: 220 / 255)
-                                )
+                                .background(Color(red: 103/255, green: 0, blue: 220/255))
                                 .cornerRadius(12)
                         }
                         .padding(.top, 24)
                         .padding(.bottom, 32)
+                        .fullScreenCover(isPresented: $showSessionStart) {
+                            SessionStartView(card: card)
+                        }
+
                     }.padding(.horizontal, 20)
                 }
                 Spacer()

@@ -47,7 +47,7 @@ struct ProfileView: View {
                         }
                     }
                     .padding(.horizontal)
-                    .padding(.top, 10)
+                    .padding(.top, 50)
                     .padding(.bottom, 30)
 
                     ScrollView {
@@ -138,7 +138,7 @@ struct ProfileView: View {
                                     .buttonStyle(PlainButtonStyle())  // Makes the whole area tappable without default styling
 
                                     NavigationLink(
-                                        destination: Text("Favorites View")
+                                        destination: FavoriteMeditationView()
                                     ) {
                                         ProfileMenuItem(
                                             icon: "heart.fill",

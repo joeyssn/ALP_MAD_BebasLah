@@ -14,6 +14,8 @@ class MeditationCardModel {
     var imageName: String
     var title: String
     var med_description: String
+    var isFavorite: Bool = false
+    
     @Relationship var meditationSession: MeditateSessionModel?
     
     init(meditationCardId: Int, imageName: String, title: String, med_description: String) {
