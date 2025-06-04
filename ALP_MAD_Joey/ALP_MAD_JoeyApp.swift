@@ -13,6 +13,7 @@ struct ALP_MAD_JoeyApp: App {
     @StateObject private var session = SessionController()
     @StateObject private var userController: UserController
     @StateObject private var moodController: MoodController
+    @StateObject private var meditationController: MeditationController
 
     @State private var isLoading = true
 
@@ -26,6 +27,7 @@ struct ALP_MAD_JoeyApp: App {
 
         _userController = StateObject(wrappedValue: UserController(context: container.mainContext))
         _moodController = StateObject(wrappedValue: MoodController(context: container.mainContext))
+        _meditationController = StateObject(wrappedValue: MeditationController(context: container.mainContext))
     }
 
     var body: some Scene {
@@ -40,6 +42,7 @@ struct ALP_MAD_JoeyApp: App {
             .environmentObject(session)
             .environmentObject(userController)
             .environmentObject(moodController)
+            .environmentObject(meditationController)
             .modelContainer(sharedModelContainer)
             .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {

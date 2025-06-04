@@ -9,12 +9,14 @@ import SwiftUI
 
 struct SessionStartView: View {
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.modelContext) private var modelContext
     @State private var isSpread = false
     @State private var rotationAngle: Double = 0
     @State private var isPaused = false
     @State private var isLiked = false
-    let card: MeditationCardModel
-    
+    @EnvironmentObject var meditationController: MeditationController
+    @Bindable var card: MeditationCardModel
+
     var body: some View {
         ZStack {
             Color.black
@@ -126,27 +128,43 @@ struct SessionStartView: View {
                         isPaused.toggle()
                     }) {
                         HStack {
-                            Image(systemName: isPaused ? "play.fill" : "pause.fill")
-                                .foregroundColor(.white)
-                                .font(.system(size: 20, weight: .bold))
+                            Image(
+                                systemName: isPaused
+                                    ? "play.fill" : "pause.fill"
+                            )
+                            .foregroundColor(.white)
+                            .font(.system(size: 20, weight: .bold))
                             Text(isPaused ? "Resume" : "Pause")
                                 .foregroundColor(.white)
                                 .font(.system(size: 18, weight: .semibold))
                         }
                         .frame(maxWidth: .infinity)
                         .frame(height: 50)
-                        .background(Color(red: 103/255, green: 0/255, blue: 220/255))
+                        .background(
+                            Color(
+                                red: 103 / 255, green: 0 / 255, blue: 220 / 255)
+                        )
                         .cornerRadius(12)
                     }
 
                     Button(action: {
-                        isLiked.toggle()
+                        card.isFavorite.toggle()
+                        do {
+                            try modelContext.save()  // ✅ Persist change
+                        } catch {
+                            print("Failed to save favorite status: \(error)")
+                        }
                     }) {
-                        Image(systemName: isLiked ? "heart.fill" : "heart")
-                            .foregroundColor(isLiked ? .red : .white)
-                            .frame(width: 50, height: 50)
-                            .background(Color(red: 103/255, green: 0/255, blue: 220/255))
-                            .cornerRadius(12)
+                        Image(
+                            systemName: card.isFavorite ? "heart.fill" : "heart"
+                        )
+                        .foregroundColor(card.isFavorite ? .red : .white)
+                        .frame(width: 50, height: 50)
+                        .background(
+                            Color(
+                                red: 103 / 255, green: 0 / 255, blue: 220 / 255)
+                        )
+                        .cornerRadius(12)
                     }
                 }
                 .padding(.top, 20)
@@ -173,15 +191,16 @@ struct PetalShape: Shape {
 
         return path
     }
-    
+
 }
 
 #Preview {
-    SessionStartView(card: MeditationCardModel(
-        meditationCardId: 4,
-        imageName: "gambar4",
-        title: "Mountain Serenity",
-        med_description:
-            "Find stability and strength in mountain meditation."
-    ))
+    SessionStartView(
+        card: MeditationCardModel(
+            meditationCardId: 4,
+            imageName: "gambar4",
+            title: "Mountain Serenity",
+            med_description:
+                "Find stability and strength in mountain meditation."
+        ))
 }
