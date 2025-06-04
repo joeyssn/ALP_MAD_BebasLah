@@ -63,7 +63,6 @@ struct NotificationSettingsView: View {
                                                let formatter = DateFormatter()
                                                formatter.dateFormat = "hh:mm a"
                                                return formatter.date(from: reminderTime) ?? Date()
-
                                            },
                                            set: { newDate in
                                                let formatter = DateFormatter()
@@ -73,9 +72,9 @@ struct NotificationSettingsView: View {
                                        displayedComponents: .hourAndMinute)
                                 .labelsHidden()
                                 .datePickerStyle(WheelDatePickerStyle())
-                                .tint(Color.white)
-                            
+                                .colorScheme(.dark) // ✅ Ensures white text and wheels
                         }
+
                     }
                 }
                 .padding()

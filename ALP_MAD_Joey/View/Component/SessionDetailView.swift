@@ -10,7 +10,36 @@ import SwiftUI
 struct SessionDetailView: View {
     @Environment(\.presentationMode) var presentationMode
     let card: MeditationCardModel
-
+    private let meditationCards = [
+        MeditationCardModel(
+            meditationCardId: 1,
+            imageName: "gambar1",
+            title: "Moonlight Mind",
+            med_description:
+                "A calming nighttime practice to release the day and embrace rest."
+        ),
+        MeditationCardModel(
+            meditationCardId: 2,
+            imageName: "gambar2",
+            title: "The Quiet Within",
+            med_description:
+                "An introspective meditation to listen to the wisdom of your inner self."
+        ),
+        MeditationCardModel(
+            meditationCardId: 3,
+            imageName: "gambar3",
+            title: "Ocean Waves",
+            med_description:
+                "Let the rhythm of waves guide you to peaceful tranquility."
+        ),
+        MeditationCardModel(
+            meditationCardId: 4,
+            imageName: "gambar4",
+            title: "Mountain Serenity",
+            med_description:
+                "Find stability and strength in mountain meditation."
+        ),
+    ]
     var body: some View {
         ZStack {
             // Background gradient
@@ -71,15 +100,26 @@ struct SessionDetailView: View {
                     VStack(alignment: .leading, spacing: 16) {
                         Text("Featured Session").font(.subheadline)
                             .foregroundColor(.white.opacity(0.8))
-                        HStack {
-                            //                            ForEach(meditationSessions.prefix(2), id: \.id) {
-                            //                                session in
-                            //                                MeditationCardView(session: session)
-                            //                            }
+                        HStack(spacing: 16) {
+                            ForEach(
+                                meditationCards
+                                    .filter { $0.meditationCardId != card.meditationCardId }
+                                    .prefix(2),
+                                id: \.meditationCardId
+                            ) { session in
+                                NavigationLink(destination: SessionDetailView(card: session)) {
+                                    MeditationCardView(card: session)
+                                }
+                                .buttonStyle(PlainButtonStyle()) // Removes default link styling (optional)
+                            }
                         }
+
+
                         NavigationLink(
                             destination:
-                                SessionStartView(card: card)
+                                NavigationStack{
+                                    SessionStartView(card: card)
+                                }
                             
                         ) {
                             Text("Start Meditating")
