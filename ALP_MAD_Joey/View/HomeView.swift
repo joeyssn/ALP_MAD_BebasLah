@@ -59,7 +59,7 @@ struct HomeView: View {
     var body: some View {
         if let user = session.currentUser{
             NavigationView {
-                ZStack(alignment: .top) {
+                ZStack {
                     Image("Login")
                         .resizable()
                         .scaledToFill()
