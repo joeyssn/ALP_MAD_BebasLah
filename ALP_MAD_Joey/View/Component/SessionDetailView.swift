@@ -10,48 +10,25 @@ import SwiftUI
 struct SessionDetailView: View {
     @Environment(\.presentationMode) var presentationMode
     let card: MeditationCardModel
+
     @State private var showSessionStart = false
 
-    private let meditationCards = [
-        MeditationCardModel(
-            meditationCardId: 1,
-            imageName: "gambar1",
-            title: "Moonlight Mind",
-            med_description:
-                "A calming nighttime practice to release the day and embrace rest."
-        ),
-        MeditationCardModel(
-            meditationCardId: 2,
-            imageName: "gambar2",
-            title: "The Quiet Within",
-            med_description:
-                "An introspective meditation to listen to the wisdom of your inner self."
-        ),
-        MeditationCardModel(
-            meditationCardId: 3,
-            imageName: "gambar3",
-            title: "Ocean Waves",
-            med_description:
-                "Let the rhythm of waves guide you to peaceful tranquility."
-        ),
-        MeditationCardModel(
-            meditationCardId: 4,
-            imageName: "gambar4",
-            title: "Mountain Serenity",
-            med_description:
-                "Find stability and strength in mountain meditation."
-        ),
-    ]
+    // Find matching session by card id
+    private var matchingSession: MeditateSessionModel? {
+        MeditationData.meditationSessions.first {
+            $0.meditationSessionId == card.meditationCardId
+        }
+    }
+
     var body: some View {
         ZStack {
-            // Background gradient
-            Color.black
-                .ignoresSafeArea()
+            Color.black.ignoresSafeArea()
+
             VStack {
                 HStack {
-                    Button(action: {
+                    Button {
                         presentationMode.wrappedValue.dismiss()
-                    }) {
+                    } label: {
                         Image(systemName: "chevron.left")
                             .foregroundColor(.white)
                             .font(.title2)
@@ -62,13 +39,13 @@ struct SessionDetailView: View {
                     Text("Session Detail")
                         .font(.system(size: 22))
                         .fontWeight(.semibold)
-                        .foregroundStyle(Color.white)
+                        .foregroundColor(.white)
 
                     Spacer()
                 }
                 .padding(.horizontal)
-                .padding(.top, 10)
-                .padding(.bottom, 10)
+                .padding(.vertical, 10)
+
                 Image(card.imageName)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -82,40 +59,48 @@ struct SessionDetailView: View {
                                 .fontWeight(.bold)
                                 .foregroundColor(.white)
 
-                            Text("20 Min • Calming Song")
-                                .font(.subheadline)
-                                .foregroundColor(.white.opacity(0.8))
-
                             Text(
-                                card.med_description
-                                
+                                "20 Min • \(matchingSession?.soundFile ?? "No sound")"
                             )
-                            .font(.body)
-                            .foregroundColor(.gray.opacity(0.9))
-                            .lineLimit(3)
-                            .multilineTextAlignment(.leading)
+                            .font(.subheadline)
+                            .foregroundColor(.white.opacity(0.8))
+
+                            Text(card.med_description)
+                                .font(.body)
+                                .foregroundColor(.gray.opacity(0.9))
+                                .fixedSize(horizontal: false, vertical: true)
+                                .multilineTextAlignment(.leading)
+
                         }
                         Spacer()
                     }
                     .padding(.horizontal, 20)
                     .padding(.bottom, 20)
+
                     VStack(alignment: .leading, spacing: 16) {
-                        Text("Featured Session").font(.subheadline)
+                        Text("Featured Session")
+                            .font(.subheadline)
                             .foregroundColor(.white.opacity(0.8))
+
                         HStack(spacing: 16) {
                             ForEach(
-                                meditationCards
-                                    .filter { $0.meditationCardId != card.meditationCardId }
+                                MeditationData.meditationCards
+                                    .filter {
+                                        $0.meditationCardId
+                                            != card.meditationCardId
+                                    }
                                     .prefix(2),
                                 id: \.meditationCardId
-                            ) { session in
-                                NavigationLink(destination: SessionDetailView(card: session)) {
-                                    MeditationCardView(card: session)
+                            ) { sessionCard in
+                                NavigationLink(
+                                    destination: SessionDetailView(
+                                        card: sessionCard)
+                                ) {
+                                    MeditationCardView(card: sessionCard)
                                 }
                                 .buttonStyle(PlainButtonStyle())
                             }
                         }
-
 
                         Button(action: {
                             showSessionStart = true
@@ -126,16 +111,29 @@ struct SessionDetailView: View {
                                 .foregroundColor(.white)
                                 .frame(maxWidth: .infinity)
                                 .frame(height: 56)
-                                .background(Color(red: 103/255, green: 0, blue: 220/255))
+                                .background(
+                                    Color(
+                                        red: 103 / 255, green: 0,
+                                        blue: 220 / 255)
+                                )
                                 .cornerRadius(12)
                         }
                         .padding(.top, 24)
                         .padding(.bottom, 32)
+                        // Pass both card and matching session
                         .fullScreenCover(isPresented: $showSessionStart) {
-                            SessionStartView(card: card)
+                            if let session = matchingSession {
+                                SessionStartView(
+                                    card: card, cardSession: session)
+                            } else {
+                                Text("No session available")
+                                    .font(.title)
+                                    .foregroundColor(.white)
+                                    .background(Color.black)
+                            }
                         }
-
-                    }.padding(.horizontal, 20)
+                    }
+                    .padding(.horizontal, 20)
                 }
                 Spacer()
             }
@@ -144,13 +142,10 @@ struct SessionDetailView: View {
     }
 }
 
+// MARK: - Preview
+
 #Preview {
     SessionDetailView(
-        card: MeditationCardModel(
-            meditationCardId: 4,
-            imageName: "gambar4",
-            title: "Mountain Serenity",
-            med_description:
-                "Find stability and strength in mountain meditation."
-        ))
+        card: MeditationData.meditationCards[3]  // Mountain Serenity
+    )
 }

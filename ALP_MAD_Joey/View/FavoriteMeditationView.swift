@@ -45,10 +45,10 @@ struct FavoriteMeditationView: View {
                         ScrollView {
                             VStack(spacing: 16) {
                                 ForEach(favoriteCards) { card in
-                                    NavigationLink(destination: SessionStartView(card: card)) {
-                                        FavMeditationCardView(card: card)
-                                    }
-                                    .padding(.horizontal, 16)
+//                                    NavigationLink(destination: SessionStartView(card: card)) {
+//                                        FavMeditationCardView(card: card)
+//                                    }
+//                                    .padding(.horizontal, 16)
                                 }
                             }
                         }

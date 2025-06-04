@@ -20,37 +20,6 @@ struct HomeView: View {
         Calendar.current.component(.weekday, from: Date()) - 1
     }
 
-    private let meditationCards = [
-        MeditationCardModel(
-            meditationCardId: 1,
-            imageName: "gambar1",
-            title: "Moonlight Mind",
-            med_description:
-                "A calming nighttime practice to release the day and embrace rest."
-        ),
-        MeditationCardModel(
-            meditationCardId: 2,
-            imageName: "gambar2",
-            title: "The Quiet Within",
-            med_description:
-                "An introspective meditation to listen to the wisdom of your inner self."
-        ),
-        MeditationCardModel(
-            meditationCardId: 3,
-            imageName: "gambar3",
-            title: "Ocean Waves",
-            med_description:
-                "Let the rhythm of waves guide you to peaceful tranquility."
-        ),
-        MeditationCardModel(
-            meditationCardId: 4,
-            imageName: "gambar4",
-            title: "Mountain Serenity",
-            med_description:
-                "Find stability and strength in mountain meditation."
-        ),
-    ]
-
     private let days = ["S", "M", "T", "W", "T", "F", "S"]
 
     private var greeting: String {
@@ -74,6 +43,10 @@ struct HomeView: View {
                     HStack {
                         Spacer()
                         HStack(spacing: 20) {
+                            NavigationLink(destination: MoodLogView()) {
+                                                            Image(systemName: "face.smiling")
+                                                                .foregroundColor(.white)
+                                                        }
                             NavigationLink(destination: NotificationSettingsView()) {
                                 Image(systemName: "bell")
                                     .foregroundColor(.white)
@@ -145,7 +118,7 @@ struct HomeView: View {
                                 ],
                                 spacing: 16
                             ) {
-                                ForEach(meditationCards, id: \.title) { card in
+                                ForEach(MeditationData.meditationCards, id: \.title) { card in
                                     NavigationLink(destination: SessionDetailView(card: card)) {
                                         MeditationCardView(card: card)
                                     }

@@ -11,9 +11,7 @@ import SwiftData
 @Model
 class MeditateSessionModel {
     @Attribute(.unique) var meditationSessionId: Int? = nil
-    
-    var moodBeforeId: String
-    var moodAfterId: String
+
     var date: Date
     var soundFile: String
     var duration: Int
@@ -29,8 +27,6 @@ class MeditateSessionModel {
 
     init(
         meditationSessionId: Int,
-        moodBeforeId: String,
-        moodAfterId: String,
         date: Date,
         soundFile: String,
         duration: Int,
@@ -38,8 +34,6 @@ class MeditateSessionModel {
         endTime: Int
     ) {
         self.meditationSessionId = meditationSessionId
-        self.moodBeforeId = moodBeforeId
-        self.moodAfterId = moodAfterId
         self.date = date
         self.soundFile = soundFile
         self.duration = duration

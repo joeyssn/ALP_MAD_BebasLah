@@ -1,10 +1,3 @@
-//
-//  SessionStartView.swift
-//  ALP_MAD_Joey
-//
-//  Created by Christianto Elvern Haryanto on 02/06/25.
-//
-
 import SwiftUI
 
 struct SessionStartView: View {
@@ -14,8 +7,14 @@ struct SessionStartView: View {
     @State private var rotationAngle: Double = 0
     @State private var isPaused = false
     @State private var isLiked = false
+    @State private var animationTimer: Timer?
+    @State private var animationTimers: [Timer] = []
+
     @EnvironmentObject var meditationController: MeditationController
-    @Bindable var card: MeditationCardModel
+    @EnvironmentObject var meditationSessionController: MeditationSessionController
+
+    let card: MeditationCardModel
+    let cardSession: MeditateSessionModel
 
     var body: some View {
         ZStack {
@@ -23,6 +22,7 @@ struct SessionStartView: View {
                 .ignoresSafeArea()
 
             VStack {
+                // Navigation bar
                 HStack {
                     Button(action: {
                         presentationMode.wrappedValue.dismiss()
@@ -31,32 +31,30 @@ struct SessionStartView: View {
                             .foregroundColor(.white)
                             .font(.title2)
                     }
-
                     Spacer()
-
                     Text("Session Started")
                         .font(.system(size: 22))
                         .fontWeight(.semibold)
                         .foregroundStyle(Color.white)
-
                     Spacer()
                 }
                 .padding(.horizontal)
                 .padding(.top, 10)
                 .padding(.bottom, 6)
-                VStack {
 
+                VStack {
                     HStack {
                         Text("Playing: \(card.title)")
                             .font(.system(size: 18))
                             .foregroundColor(Color.gray)
                     }
-
-                }.frame(maxWidth: .infinity)
-                    .padding(.horizontal, 20)
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.horizontal, 20)
 
                 Spacer().frame(height: 30)
 
+                // Animated petals
                 ZStack {
                     ForEach(0..<6, id: \.self) { index in
                         PetalShape()
@@ -73,38 +71,17 @@ struct SessionStartView: View {
                                 )
                             )
                             .frame(width: 120, height: 120)
-                            .rotationEffect(
-                                .degrees(Double(index) * 60 + rotationAngle)
-                            )
+                            .rotationEffect(.degrees(Double(index) * 60 + rotationAngle))
                             .offset(
-                                x: isSpread
-                                    ? cos(Double(index) * 60 * .pi / 180) * 55
-                                    : 0,
-                                y: isSpread
-                                    ? sin(Double(index) * 60 * .pi / 180) * 55
-                                    : 0
+                                x: isSpread ? cos(Double(index) * 60 * .pi / 180) * 55 : 0,
+                                y: isSpread ? sin(Double(index) * 60 * .pi / 180) * 55 : 0
                             )
                             .scaleEffect(isSpread ? 1.2 : 0.8)
                     }
                 }
                 .frame(width: 300, height: 300)
-                .onAppear {
-                    // Infinite rotation
-                    withAnimation(
-                        .linear(duration: 5).repeatForever(autoreverses: false)
-                    ) {
-                        rotationAngle = 360
-                    }
 
-                    // Infinite spread/merge animation
-                    withAnimation(
-                        .easeInOut(duration: 4).repeatForever(
-                            autoreverses: true)
-                    ) {
-                        isSpread = true
-                    }
-                }
-
+                // Playback progress bar (static for now)
                 HStack {
                     Text("00:00").foregroundStyle(Color.white)
                     Rectangle()
@@ -123,48 +100,44 @@ struct SessionStartView: View {
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 5)
+
+                // Play/Pause and Favorite buttons
                 HStack(spacing: 12) {
                     Button(action: {
                         isPaused.toggle()
+                        if isPaused {
+                            meditationSessionController.pauseSound()
+                        } else {
+                            meditationSessionController.resumeSound()
+                        }
                     }) {
                         HStack {
-                            Image(
-                                systemName: isPaused
-                                    ? "play.fill" : "pause.fill"
-                            )
-                            .foregroundColor(.white)
-                            .font(.system(size: 20, weight: .bold))
+                            Image(systemName: isPaused ? "play.fill" : "pause.fill")
+                                .foregroundColor(.white)
+                                .font(.system(size: 20, weight: .bold))
                             Text(isPaused ? "Resume" : "Pause")
                                 .foregroundColor(.white)
                                 .font(.system(size: 18, weight: .semibold))
                         }
                         .frame(maxWidth: .infinity)
                         .frame(height: 50)
-                        .background(
-                            Color(
-                                red: 103 / 255, green: 0 / 255, blue: 220 / 255)
-                        )
+                        .background(Color(red: 103 / 255, green: 0 / 255, blue: 220 / 255))
                         .cornerRadius(12)
                     }
 
                     Button(action: {
                         card.isFavorite.toggle()
                         do {
-                            try modelContext.save()  // ✅ Persist change
+                            try modelContext.save()
                         } catch {
                             print("Failed to save favorite status: \(error)")
                         }
                     }) {
-                        Image(
-                            systemName: card.isFavorite ? "heart.fill" : "heart"
-                        )
-                        .foregroundColor(card.isFavorite ? .red : .white)
-                        .frame(width: 50, height: 50)
-                        .background(
-                            Color(
-                                red: 103 / 255, green: 0 / 255, blue: 220 / 255)
-                        )
-                        .cornerRadius(12)
+                        Image(systemName: card.isFavorite ? "heart.fill" : "heart")
+                            .foregroundColor(card.isFavorite ? .red : .white)
+                            .frame(width: 50, height: 50)
+                            .background(Color(red: 103 / 255, green: 0 / 255, blue: 220 / 255))
+                            .cornerRadius(12)
                     }
                 }
                 .padding(.top, 20)
@@ -173,34 +146,61 @@ struct SessionStartView: View {
                 Spacer()
             }
             .navigationBarHidden(true)
+            .onAppear {
+                meditationSessionController.playSound(named: cardSession.soundFile)
+                isPaused = false
+                startAnimations()
+            }
+            .onDisappear {
+                meditationSessionController.stopSound()
+                stopAnimations()
+            }
         }
+    }
+
+    // MARK: - Animation Control
+    func startAnimations() {
+        stopAnimations()
+
+        // Continuous rotation timer
+        animationTimer = Timer.scheduledTimer(withTimeInterval: 0.02, repeats: true) { _ in
+            if !isPaused {
+                rotationAngle += 0.5
+            }
+        }
+
+        // Continuous spread animation toggle every 2s
+        let spreadTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { _ in
+            if !isPaused {
+                withAnimation(.easeInOut(duration: 2.0)) {
+                    isSpread.toggle()
+                }
+            }
+        }
+        animationTimers.append(spreadTimer)
+    }
+
+    func stopAnimations() {
+        animationTimer?.invalidate()
+        animationTimer = nil
+
+        for timer in animationTimers {
+            timer.invalidate()
+        }
+        animationTimers.removeAll()
     }
 }
 
+// MARK: - Petal Shape
 struct PetalShape: Shape {
     func path(in rect: CGRect) -> Path {
         var path = Path()
         let center = CGPoint(x: rect.midX, y: rect.midY)
         let radius = min(rect.width, rect.height) / 2
 
-        // Create a simple circle
-        path.addEllipse(
-            in: CGRect(
-                x: center.x - radius, y: center.y - radius, width: radius * 2,
-                height: radius * 2))
+        path.addEllipse(in: CGRect(x: center.x - radius, y: center.y - radius,
+                                   width: radius * 2, height: radius * 2))
 
         return path
     }
-
-}
-
-#Preview {
-    SessionStartView(
-        card: MeditationCardModel(
-            meditationCardId: 4,
-            imageName: "gambar4",
-            title: "Mountain Serenity",
-            med_description:
-                "Find stability and strength in mountain meditation."
-        ))
 }
