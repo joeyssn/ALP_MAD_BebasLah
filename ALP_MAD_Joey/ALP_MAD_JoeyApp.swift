@@ -12,29 +12,51 @@ import SwiftUI
 struct ALP_MAD_JoeyApp: App {
     @StateObject private var session = SessionController()
     @StateObject private var userController: UserController
+    @StateObject private var moodController: MoodController
+
+    @State private var isLoading = true
 
     var sharedModelContainer: ModelContainer
-    init() {
-        let schema = Schema([
-            UserModel.self
-                //            MeditateSessionModel.self,
-                //            MoodModel.self,
-                //            ReminderModel.self
-        ])
-        let config = ModelConfiguration(schema: schema)
-        let container = try! ModelContainer(
-            for: schema, configurations: [config])
-        sharedModelContainer = container
-        // Initialize UserController with the container's main context
-        _userController = StateObject(
-            wrappedValue: UserController(context: container.mainContext))
 
+    init() {
+        let schema = Schema([UserModel.self, MoodModel.self])
+        let config = ModelConfiguration(schema: schema)
+        let container = try! ModelContainer(for: schema, configurations: [config])
+        sharedModelContainer = container
+
+        _userController = StateObject(wrappedValue: UserController(context: container.mainContext))
+        _moodController = StateObject(wrappedValue: MoodController(context: container.mainContext))
     }
+
     var body: some Scene {
         WindowGroup {
-            StartView().environmentObject(session)
-                .environmentObject(userController)
-                .modelContainer(sharedModelContainer)
+            Group {
+                if isLoading {
+                    LoadingView()
+                } else {
+                    RootView()
+                }
+            }
+            .environmentObject(session)
+            .environmentObject(userController)
+            .environmentObject(moodController)
+            .modelContainer(sharedModelContainer)
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+                    withAnimation {
+                        isLoading = false
+                    }
+                }
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func RootView() -> some View {
+        if session.currentUser == nil {
+            LoginRegisterView()
+        } else {
+            HomeView()
         }
     }
 }
