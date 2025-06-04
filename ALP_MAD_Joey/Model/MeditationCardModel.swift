@@ -10,7 +10,7 @@ import SwiftData
 
 @Model
 class MeditationCardModel {
-    @Attribute(.unique) var meditationCardId: Int? = nil
+    @Attribute(.unique) var meditationCardId: Int
     var imageName: String
     var title: String
     var med_description: String
