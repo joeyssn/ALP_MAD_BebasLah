@@ -9,6 +9,7 @@ import SwiftData
 import SwiftUI
 
 struct MoodLogView: View {
+    //EnvironmentObject di save utk global StateObject utk 1 page, ObserveObject rentan ke reset datanya kalo pindah page
     @Environment(\.modelContext) private var modelContext
     @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var sessionController: SessionController
