@@ -14,8 +14,8 @@ struct MoodView: View {
     @State private var rotationAnimation = 0.0
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.modelContext) var modelContext
-    @EnvironmentObject var sessionController: SessionController
-    @EnvironmentObject var moodController: MoodController
+    @EnvironmentObject var session: SessionViewModel
+    @EnvironmentObject var moodViewModel: MoodViewModel
 
     private let moods: [MoodType] = [.unhappy, .sad, .normal, .good, .happy]
 
@@ -223,9 +223,9 @@ struct MoodView: View {
                 Button(action: {
                     presentationMode.wrappedValue.dismiss()
                     do {
-                        try moodController.logMood(
+                        try moodViewModel.logMood(
                             moodName: selectedMood.title,
-                            for: sessionController.currentUser?.userId ?? -1
+                            for: session.currentUser?.userId ?? -1
                         )
                     } catch {
                         print(

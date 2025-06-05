@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @MainActor
-class MeditationSessionController: ObservableObject {
+class MeditationSessionViewModel: ObservableObject {
     let modelContext: ModelContext
 
     init(context: ModelContext) {

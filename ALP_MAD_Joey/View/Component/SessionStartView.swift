@@ -10,8 +10,8 @@ struct SessionStartView: View {
     @State private var animationTimer: Timer?
     @State private var animationTimers: [Timer] = []
 
-    @EnvironmentObject var meditationController: MeditationController
-    @EnvironmentObject var meditationSessionController: MeditationSessionController
+    @EnvironmentObject var meditationViewModel: MeditationViewModel
+    @EnvironmentObject var meditationSessionViewModel: MeditationSessionViewModel
 
     let card: MeditationCardModel
     let cardSession: MeditateSessionModel
@@ -106,9 +106,9 @@ struct SessionStartView: View {
                     Button(action: {
                         isPaused.toggle()
                         if isPaused {
-                            meditationSessionController.pauseSound()
+                            meditationSessionViewModel.pauseSound()
                         } else {
-                            meditationSessionController.resumeSound()
+                            meditationSessionViewModel.resumeSound()
                         }
                     }) {
                         HStack {
@@ -147,12 +147,12 @@ struct SessionStartView: View {
             }
             .navigationBarHidden(true)
             .onAppear {
-                meditationSessionController.playSound(named: cardSession.soundFile)
+                meditationSessionViewModel.playSound(named: cardSession.soundFile)
                 isPaused = false
                 startAnimations()
             }
             .onDisappear {
-                meditationSessionController.stopSound()
+                meditationSessionViewModel.stopSound()
                 stopAnimations()
             }
         }

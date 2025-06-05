@@ -10,8 +10,8 @@ import SwiftData
 
 struct LoginRegisterView: View {
     @Environment(\.modelContext) private var context
-    @EnvironmentObject var sessionController: SessionController
-    @EnvironmentObject var userController: UserController
+    @EnvironmentObject var sessionViewModel: SessionViewModel
+    @EnvironmentObject var userViewModel: UserViewModel
 
     @State private var username = ""
     @State private var password = ""
@@ -120,20 +120,20 @@ struct LoginRegisterView: View {
     private func handleAuthAction() {
         do {
             if isRegistering {
-                let success = try userController.register(username: username, password: password)
+                let success = try userViewModel.register(username: username, password: password)
                 if !success {
                     errorMessage = "Username already exists."
                     return
                 }
-                if let user = try userController.login(username: username, password: password) {
-                    sessionController.currentUser = user
+                if let user = try userViewModel.login(username: username, password: password) {
+                    sessionViewModel.currentUser = user
                 }
             } else {
-                guard let user = try userController.login(username: username, password: password) else {
+                guard let user = try userViewModel.login(username: username, password: password) else {
                     errorMessage = "Invalid username or password."
                     return
                 }
-                sessionController.currentUser = user
+                sessionViewModel.currentUser = user
             }
 
             errorMessage = ""

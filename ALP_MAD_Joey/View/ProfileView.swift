@@ -10,11 +10,11 @@ import SwiftUI
 
 struct ProfileView: View {
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var session: SessionController
+    @EnvironmentObject var sessionViewModel: SessionViewModel
     @Environment(\.modelContext) private var context
 
     var body: some View {
-        if let user = session.currentUser {
+        if let user = sessionViewModel.currentUser {
             ZStack {
                 Image("Login")
                     .resizable()
@@ -196,7 +196,7 @@ struct ProfileView: View {
 
                                 // Sign Out Button
                                 Button(action: {
-                                    session.logout()
+                                    sessionViewModel.logout()
                                 }) {
                                     HStack {
                                         Image(systemName: "rectangle.portrait.and.arrow.right")

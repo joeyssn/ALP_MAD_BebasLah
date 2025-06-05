@@ -9,7 +9,7 @@ import SwiftData
 import SwiftUI
 
 struct HomeView: View {
-    @EnvironmentObject var session: SessionController
+    @EnvironmentObject var sessionViewModel: SessionViewModel
     @Environment(\.modelContext) private var context
 
     private var currentHour: Int {
@@ -66,7 +66,7 @@ struct HomeView: View {
                             .foregroundColor(.white.opacity(0.8))
                             .font(.title2)
 
-                        Text(session.currentUser?.username ?? "User")
+                        Text(sessionViewModel.currentUser?.username ?? "User")
                             .foregroundColor(.white)
                             .font(.largeTitle)
                             .fontWeight(.bold)
@@ -144,7 +144,7 @@ struct HomeView: View {
         username: "Calvin",
         password: "123"
     )
-    let dummySession = SessionController()
+    let dummySession = SessionViewModel()
     dummySession.login(user: dummyUser)
 
     return HomeView()
