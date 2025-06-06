@@ -10,11 +10,11 @@ import SwiftUI
 
 @main
 struct ALP_MAD_JoeyApp: App {
-    @StateObject private var session = SessionController()
-    @StateObject private var userController: UserController
-    @StateObject private var moodController: MoodController
-    @StateObject private var meditationController: MeditationController
-    @StateObject private var meditationSessionController: MeditationSessionController
+    @StateObject private var session = SessionViewModel()
+    @StateObject private var userController: UserViewModel
+    @StateObject private var moodController: MoodViewModel
+    @StateObject private var meditationController: MeditationViewModel
+    @StateObject private var meditationSessionController: MeditationSessionViewModel
 
     @State private var isLoading = true
 
@@ -26,10 +26,10 @@ struct ALP_MAD_JoeyApp: App {
         let container = try! ModelContainer(for: schema, configurations: [config])
         sharedModelContainer = container
 
-        _userController = StateObject(wrappedValue: UserController(context: container.mainContext))
-        _moodController = StateObject(wrappedValue: MoodController(context: container.mainContext))
-        _meditationController = StateObject(wrappedValue: MeditationController(context: container.mainContext))
-        _meditationSessionController = StateObject(wrappedValue: MeditationSessionController(context: container.mainContext))
+        _userController = StateObject(wrappedValue: UserViewModel(context: container.mainContext))
+        _moodController = StateObject(wrappedValue: MoodViewModel(context: container.mainContext))
+        _meditationController = StateObject(wrappedValue: MeditationViewModel(context: container.mainContext))
+        _meditationSessionController = StateObject(wrappedValue: MeditationSessionViewModel(context: container.mainContext))
     }
 
     var body: some Scene {
