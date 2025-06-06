@@ -46,5 +46,6 @@ class UserController: ObservableObject {
         let users = try context.fetch(descriptor)
         return !users.isEmpty
     }
+    
 }
 
