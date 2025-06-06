@@ -6,11 +6,15 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct NotificationSettingsView: View {
     @AppStorage("reminderEnabled") private var reminderEnabled = false
     @AppStorage("reminderTime") private var reminderTime = "08:00 AM"
+
     @Environment(\.presentationMode) private var presentationMode
+    @EnvironmentObject var sessionViewModel: SessionViewModel
+    @StateObject private var notificationVM = NotificationViewModel()
 
     var body: some View {
         ZStack {
@@ -38,7 +42,7 @@ struct NotificationSettingsView: View {
 
                     Spacer()
 
-                    Spacer().frame(width: 28) // Placeholder for symmetry
+                    Spacer().frame(width: 28)
                 }
                 .padding(.horizontal)
                 .padding(.top, 50)
@@ -51,6 +55,14 @@ struct NotificationSettingsView: View {
                             .font(.headline)
                     }
                     .toggleStyle(SwitchToggleStyle(tint: .purple))
+                    .onChange(of: reminderEnabled) { newValue in
+                        if newValue, let user = sessionViewModel.currentUser {
+                            notificationVM.requestPermission()
+                            notificationVM.scheduleDailyNotification(at: reminderTime, for: user.username)
+                        } else {
+                            notificationVM.cancelNotification()
+                        }
+                    }
 
                     if reminderEnabled {
                         VStack(spacing: 10) {
@@ -68,13 +80,17 @@ struct NotificationSettingsView: View {
                                                let formatter = DateFormatter()
                                                formatter.dateFormat = "hh:mm a"
                                                reminderTime = formatter.string(from: newDate)
+
+                                               if let user = sessionViewModel.currentUser {
+                                                   notificationVM.cancelNotification()
+                                                   notificationVM.scheduleDailyNotification(at: reminderTime, for: user.username)
+                                               }
                                            }),
                                        displayedComponents: .hourAndMinute)
                                 .labelsHidden()
                                 .datePickerStyle(WheelDatePickerStyle())
-                                .colorScheme(.dark) // ✅ Ensures white text and wheels
+                                .colorScheme(.dark)
                         }
-
                     }
                 }
                 .padding()
@@ -97,4 +113,5 @@ struct NotificationSettingsView: View {
 
 #Preview {
     NotificationSettingsView()
+        .environmentObject(SessionViewModel())
 }
