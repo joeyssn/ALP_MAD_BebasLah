@@ -17,13 +17,27 @@ struct MeditationData {
         MeditationCardModel(meditationCardId: 6, imageName: "gambar6", title: "Stanley Young", med_description: "I'm gay")
     ]
 
-    static let meditationSessions = [
-        MeditateSessionModel(meditationSessionId: 1, date: Date(), soundFile: "Don't Listen to Them", duration: 1200, startTime: 0, endTime: 1200),
-        MeditateSessionModel(meditationSessionId: 2, date: Date(), soundFile: "Kiss The Rain", duration: 1200, startTime: 0, endTime: 1200),
-        MeditateSessionModel(meditationSessionId: 3, date: Date(), soundFile: "River Flows In You", duration: 1200, startTime: 0, endTime: 1200),
-        MeditateSessionModel(meditationSessionId: 4, date: Date(), soundFile: "Love Me", duration: 1200, startTime: 0, endTime: 1200),
-        MeditateSessionModel(meditationSessionId: 5, date: Date(), soundFile: "Ada Nona Ambon Ga Disini", duration: 1200, startTime: 0, endTime: 1200),
-        MeditateSessionModel(meditationSessionId: 6, date: Date(), soundFile: "Young Gay", duration: 1200, startTime: 0, endTime: 1200)
-    ]
-    
+    static func meditationSessions() -> [MeditateSessionModel] {
+        let soundFiles = [
+            "Don't Listen to Them",
+            "Kiss The Rain",
+            "River Flows In You",
+            "Love Me",
+            "Ada Nona Ambon Ga Disini",
+            "Young Gay"
+        ]
+
+        return soundFiles.enumerated().compactMap { index, soundFile in
+            let durationSeconds = SoundManager.shared.getDuration(of: soundFile)
+            let duration = Int(durationSeconds)
+            return MeditateSessionModel(
+                meditationSessionId: index + 1,
+                date: Date(),
+                soundFile: soundFile,
+                duration: duration,
+                startTime: 0,
+                endTime: duration
+            )
+        }
+    }
 }

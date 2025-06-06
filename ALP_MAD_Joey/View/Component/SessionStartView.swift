@@ -9,6 +9,8 @@ struct SessionStartView: View {
     @State private var isLiked = false
     @State private var animationTimer: Timer?
     @State private var animationTimers: [Timer] = []
+    @State private var elapsedSeconds: Int = 0
+    @State private var playbackTimer: Timer?
 
     @EnvironmentObject var meditationController: MeditationController
     @EnvironmentObject var meditationSessionController: MeditationSessionController
@@ -83,23 +85,32 @@ struct SessionStartView: View {
 
                 // Playback progress bar (static for now)
                 HStack {
-                    Text("00:00").foregroundStyle(Color.white)
-                    Rectangle()
-                        .fill(Color.gray.opacity(0.3))
-                        .frame(height: 4)
-                        .overlay(
-                            HStack {
-                                Rectangle()
-                                    .fill(Color.purple)
-                                    .frame(width: 120, height: 4)
-                                Spacer()
-                            }
-                        )
-                        .cornerRadius(2)
-                    Text("00:00").foregroundStyle(Color.white)
+                    Text(formatDuration(elapsedSeconds))
+                        .foregroundStyle(Color.white)
+                    GeometryReader { geo in
+                        Rectangle()
+                            .fill(Color.gray.opacity(0.3))
+                            .frame(height: 4)
+                            .overlay(
+                                HStack {
+                                    Rectangle()
+                                        .fill(Color.purple)
+                                        .frame(
+                                            width: geo.size.width * CGFloat(elapsedSeconds) / CGFloat(cardSession.duration),
+                                            height: 4
+                                        )
+                                    Spacer()
+                                }
+                            )
+                            .cornerRadius(2)
+                    }
+                    .frame(height: 4)  // Fix height of GeometryReader
+                    Text(formatDuration(cardSession.duration))
+                        .foregroundStyle(Color.white)
                 }
                 .padding(.horizontal, 20)
                 .padding(.top, 5)
+
 
                 // Play/Pause and Favorite buttons
                 HStack(spacing: 12) {
@@ -124,21 +135,6 @@ struct SessionStartView: View {
                         .background(Color(red: 103 / 255, green: 0 / 255, blue: 220 / 255))
                         .cornerRadius(12)
                     }
-
-                    Button(action: {
-                        card.isFavorite.toggle()
-                        do {
-                            try modelContext.save()
-                        } catch {
-                            print("Failed to save favorite status: \(error)")
-                        }
-                    }) {
-                        Image(systemName: card.isFavorite ? "heart.fill" : "heart")
-                            .foregroundColor(card.isFavorite ? .red : .white)
-                            .frame(width: 50, height: 50)
-                            .background(Color(red: 103 / 255, green: 0 / 255, blue: 220 / 255))
-                            .cornerRadius(12)
-                    }
                 }
                 .padding(.top, 20)
                 .padding(.horizontal, 20)
@@ -149,12 +145,16 @@ struct SessionStartView: View {
             .onAppear {
                 meditationSessionController.playSound(named: cardSession.soundFile)
                 isPaused = false
+                elapsedSeconds = 0       // reset when starting new session
                 startAnimations()
+                startPlaybackTimer()
             }
             .onDisappear {
                 meditationSessionController.stopSound()
                 stopAnimations()
+                stopPlaybackTimer()
             }
+
         }
     }
 
@@ -189,6 +189,32 @@ struct SessionStartView: View {
         }
         animationTimers.removeAll()
     }
+    func formatDuration(_ seconds: Int?) -> String {
+        guard let seconds = seconds else { return "--:--" }
+        let minutes = seconds / 60
+        let remainingSeconds = seconds % 60
+        return String(format: "%d:%02d", minutes, remainingSeconds)
+    }
+    func startPlaybackTimer() {
+        stopPlaybackTimer() // just in case
+
+        playbackTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { _ in
+            if !isPaused {
+                if elapsedSeconds < cardSession.duration {
+                    elapsedSeconds += 1
+                } else {
+                    // Session ended — optionally stop timer or trigger something
+                    stopPlaybackTimer()
+                }
+            }
+        }
+    }
+
+    func stopPlaybackTimer() {
+        playbackTimer?.invalidate()
+        playbackTimer = nil
+    }
+
 }
 
 // MARK: - Petal Shape

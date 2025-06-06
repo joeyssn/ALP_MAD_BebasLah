@@ -15,10 +15,26 @@ struct SessionDetailView: View {
 
     // Find matching session by card id
     private var matchingSession: MeditateSessionModel? {
-        MeditationData.meditationSessions.first {
+        MeditationData.meditationSessions().first {
             $0.meditationSessionId == card.meditationCardId
         }
     }
+    
+    // Helper function to format seconds to "m:ss"
+    func formatDuration(_ seconds: Int?) -> String {
+        guard let seconds = seconds else { return "--:--" }
+        let minutes = seconds / 60
+        let remainingSeconds = seconds % 60
+        if minutes != 0{
+            return String(format: "%dmin %02dsec", minutes, remainingSeconds)
+        }else if remainingSeconds == 0{
+            return String(format: "%dmin", minutes)
+        }else{
+            return String(format: "%02dsec", remainingSeconds)
+        }
+        
+    }
+
 
     var body: some View {
         ZStack {
@@ -60,7 +76,7 @@ struct SessionDetailView: View {
                                 .foregroundColor(.white)
 
                             Text(
-                                "20 Min • \(matchingSession?.soundFile ?? "No sound")"
+                                "\(formatDuration(matchingSession?.duration)) • \(matchingSession?.soundFile ?? "No sound")"
                             )
                             .font(.subheadline)
                             .foregroundColor(.white.opacity(0.8))

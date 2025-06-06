@@ -137,16 +137,16 @@ struct ProfileView: View {
                                     }
                                     .buttonStyle(PlainButtonStyle())  // Makes the whole area tappable without default styling
 
-                                    NavigationLink(
-                                        destination: FavoriteMeditationView()
-                                    ) {
-                                        ProfileMenuItem(
-                                            icon: "heart.fill",
-                                            title: "Favorites",
-                                            subtitle: "Your liked meditations"
-                                        )
-                                    }
-                                    .buttonStyle(PlainButtonStyle())
+//                                    NavigationLink(
+//                                        destination: FavoriteMeditationView()
+//                                    ) {
+//                                        ProfileMenuItem(
+//                                            icon: "heart.fill",
+//                                            title: "Favorites",
+//                                            subtitle: "Your liked meditations"
+//                                        )
+//                                    }
+//                                    .buttonStyle(PlainButtonStyle())
 
                                     NavigationLink(
                                         destination: MoodLogView()
@@ -159,16 +159,16 @@ struct ProfileView: View {
                                     }
                                     .buttonStyle(PlainButtonStyle())
 
-                                    NavigationLink(
-                                        destination: Text("Progress View")
-                                    ) {
-                                        ProfileMenuItem(
-                                            icon: "chart.bar.fill",
-                                            title: "Progress",
-                                            subtitle: "Track your journey"
-                                        )
-                                    }
-                                    .buttonStyle(PlainButtonStyle())
+//                                    NavigationLink(
+//                                        destination: Text("Progress View")
+//                                    ) {
+//                                        ProfileMenuItem(
+//                                            icon: "chart.bar.fill",
+//                                            title: "Progress",
+//                                            subtitle: "Track your journey"
+//                                        )
+//                                    }
+//                                    .buttonStyle(PlainButtonStyle())
 
                                     NavigationLink(
                                         destination: Text("Help & Support View")
