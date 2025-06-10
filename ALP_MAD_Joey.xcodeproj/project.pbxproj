@@ -6,10 +6,6 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		F9EDFE6A2DF8A41800478AA3 /* LunarisWatch Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = F9EDFE472DF8A41600478AA3 /* LunarisWatch Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-/* End PBXBuildFile section */
-
 /* Begin PBXContainerItemProxy section */
 		3F2B2E212DDEB9EF00956565 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -25,27 +21,6 @@
 			remoteGlobalIDString = 3F2B2E122DDEB9ED00956565;
 			remoteInfo = ALP_MAD_Joey;
 		};
-		F9EDFE572DF8A41800478AA3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3F2B2E0B2DDEB9ED00956565 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F9EDFE462DF8A41600478AA3;
-			remoteInfo = "LunarisWatch Watch App";
-		};
-		F9EDFE612DF8A41800478AA3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3F2B2E0B2DDEB9ED00956565 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F9EDFE462DF8A41600478AA3;
-			remoteInfo = "LunarisWatch Watch App";
-		};
-		F9EDFE682DF8A41800478AA3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3F2B2E0B2DDEB9ED00956565 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F9EDFE462DF8A41600478AA3;
-			remoteInfo = "LunarisWatch Watch App";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -55,7 +30,6 @@
 			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
 			dstSubfolderSpec = 16;
 			files = (
-				F9EDFE6A2DF8A41800478AA3 /* LunarisWatch Watch App.app in Embed Watch Content */,
 			);
 			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -68,9 +42,6 @@
 		3F2B2E2A2DDEB9EF00956565 /* ALP_MAD_JoeyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ALP_MAD_JoeyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFAA68C42DF88533001A4E40 /* WatchConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchConnectivity.framework; path = System/Library/Frameworks/WatchConnectivity.framework; sourceTree = SDKROOT; };
 		BFAA68E32DF89134001A4E40 /* LunarisIpad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LunarisIpad.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		F9EDFE472DF8A41600478AA3 /* LunarisWatch Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "LunarisWatch Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F9EDFE562DF8A41800478AA3 /* LunarisWatch Watch AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "LunarisWatch Watch AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F9EDFE602DF8A41800478AA3 /* LunarisWatch Watch AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "LunarisWatch Watch AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -134,21 +105,6 @@
 			path = LunarisIpad;
 			sourceTree = "<group>";
 		};
-		F9EDFE482DF8A41600478AA3 /* LunarisWatch Watch App */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "LunarisWatch Watch App";
-			sourceTree = "<group>";
-		};
-		F9EDFE592DF8A41800478AA3 /* LunarisWatch Watch AppTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "LunarisWatch Watch AppTests";
-			sourceTree = "<group>";
-		};
-		F9EDFE632DF8A41800478AA3 /* LunarisWatch Watch AppUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "LunarisWatch Watch AppUITests";
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,27 +136,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F9EDFE442DF8A41600478AA3 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F9EDFE532DF8A41800478AA3 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F9EDFE5D2DF8A41800478AA3 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -211,9 +146,6 @@
 				3F2B2E232DDEB9EF00956565 /* ALP_MAD_JoeyTests */,
 				3F2B2E2D2DDEB9EF00956565 /* ALP_MAD_JoeyUITests */,
 				BFAA68E42DF89134001A4E40 /* LunarisIpad */,
-				F9EDFE482DF8A41600478AA3 /* LunarisWatch Watch App */,
-				F9EDFE592DF8A41800478AA3 /* LunarisWatch Watch AppTests */,
-				F9EDFE632DF8A41800478AA3 /* LunarisWatch Watch AppUITests */,
 				BFAA68C32DF88533001A4E40 /* Frameworks */,
 				3F2B2E142DDEB9ED00956565 /* Products */,
 			);
@@ -226,9 +158,6 @@
 				3F2B2E202DDEB9EF00956565 /* ALP_MAD_JoeyTests.xctest */,
 				3F2B2E2A2DDEB9EF00956565 /* ALP_MAD_JoeyUITests.xctest */,
 				BFAA68E32DF89134001A4E40 /* LunarisIpad.app */,
-				F9EDFE472DF8A41600478AA3 /* LunarisWatch Watch App.app */,
-				F9EDFE562DF8A41800478AA3 /* LunarisWatch Watch AppTests.xctest */,
-				F9EDFE602DF8A41800478AA3 /* LunarisWatch Watch AppUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -256,7 +185,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				F9EDFE692DF8A41800478AA3 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				3F2B2E152DDEB9ED00956565 /* ALP_MAD_Joey */,
@@ -336,74 +264,6 @@
 			productReference = BFAA68E32DF89134001A4E40 /* LunarisIpad.app */;
 			productType = "com.apple.product-type.application";
 		};
-		F9EDFE462DF8A41600478AA3 /* LunarisWatch Watch App */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F9EDFE6B2DF8A41800478AA3 /* Build configuration list for PBXNativeTarget "LunarisWatch Watch App" */;
-			buildPhases = (
-				F9EDFE432DF8A41600478AA3 /* Sources */,
-				F9EDFE442DF8A41600478AA3 /* Frameworks */,
-				F9EDFE452DF8A41600478AA3 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				F9EDFE482DF8A41600478AA3 /* LunarisWatch Watch App */,
-			);
-			name = "LunarisWatch Watch App";
-			packageProductDependencies = (
-			);
-			productName = "LunarisWatch Watch App";
-			productReference = F9EDFE472DF8A41600478AA3 /* LunarisWatch Watch App.app */;
-			productType = "com.apple.product-type.application";
-		};
-		F9EDFE552DF8A41800478AA3 /* LunarisWatch Watch AppTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F9EDFE6F2DF8A41800478AA3 /* Build configuration list for PBXNativeTarget "LunarisWatch Watch AppTests" */;
-			buildPhases = (
-				F9EDFE522DF8A41800478AA3 /* Sources */,
-				F9EDFE532DF8A41800478AA3 /* Frameworks */,
-				F9EDFE542DF8A41800478AA3 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				F9EDFE582DF8A41800478AA3 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				F9EDFE592DF8A41800478AA3 /* LunarisWatch Watch AppTests */,
-			);
-			name = "LunarisWatch Watch AppTests";
-			packageProductDependencies = (
-			);
-			productName = "LunarisWatch Watch AppTests";
-			productReference = F9EDFE562DF8A41800478AA3 /* LunarisWatch Watch AppTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		F9EDFE5F2DF8A41800478AA3 /* LunarisWatch Watch AppUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F9EDFE722DF8A41800478AA3 /* Build configuration list for PBXNativeTarget "LunarisWatch Watch AppUITests" */;
-			buildPhases = (
-				F9EDFE5C2DF8A41800478AA3 /* Sources */,
-				F9EDFE5D2DF8A41800478AA3 /* Frameworks */,
-				F9EDFE5E2DF8A41800478AA3 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				F9EDFE622DF8A41800478AA3 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				F9EDFE632DF8A41800478AA3 /* LunarisWatch Watch AppUITests */,
-			);
-			name = "LunarisWatch Watch AppUITests";
-			packageProductDependencies = (
-			);
-			productName = "LunarisWatch Watch AppUITests";
-			productReference = F9EDFE602DF8A41800478AA3 /* LunarisWatch Watch AppUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -428,17 +288,6 @@
 					BFAA68E22DF89134001A4E40 = {
 						CreatedOnToolsVersion = 16.3;
 					};
-					F9EDFE462DF8A41600478AA3 = {
-						CreatedOnToolsVersion = 16.2;
-					};
-					F9EDFE552DF8A41800478AA3 = {
-						CreatedOnToolsVersion = 16.2;
-						TestTargetID = F9EDFE462DF8A41600478AA3;
-					};
-					F9EDFE5F2DF8A41800478AA3 = {
-						CreatedOnToolsVersion = 16.2;
-						TestTargetID = F9EDFE462DF8A41600478AA3;
-					};
 				};
 			};
 			buildConfigurationList = 3F2B2E0E2DDEB9ED00956565 /* Build configuration list for PBXProject "ALP_MAD_Joey" */;
@@ -459,9 +308,6 @@
 				3F2B2E1F2DDEB9EF00956565 /* ALP_MAD_JoeyTests */,
 				3F2B2E292DDEB9EF00956565 /* ALP_MAD_JoeyUITests */,
 				BFAA68E22DF89134001A4E40 /* LunarisIpad */,
-				F9EDFE462DF8A41600478AA3 /* LunarisWatch Watch App */,
-				F9EDFE552DF8A41800478AA3 /* LunarisWatch Watch AppTests */,
-				F9EDFE5F2DF8A41800478AA3 /* LunarisWatch Watch AppUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -489,27 +335,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		BFAA68E12DF89134001A4E40 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F9EDFE452DF8A41600478AA3 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F9EDFE542DF8A41800478AA3 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F9EDFE5E2DF8A41800478AA3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -547,27 +372,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F9EDFE432DF8A41600478AA3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F9EDFE522DF8A41800478AA3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F9EDFE5C2DF8A41800478AA3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -580,21 +384,6 @@
 			isa = PBXTargetDependency;
 			target = 3F2B2E122DDEB9ED00956565 /* ALP_MAD_Joey */;
 			targetProxy = 3F2B2E2B2DDEB9EF00956565 /* PBXContainerItemProxy */;
-		};
-		F9EDFE582DF8A41800478AA3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = F9EDFE462DF8A41600478AA3 /* LunarisWatch Watch App */;
-			targetProxy = F9EDFE572DF8A41800478AA3 /* PBXContainerItemProxy */;
-		};
-		F9EDFE622DF8A41800478AA3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = F9EDFE462DF8A41600478AA3 /* LunarisWatch Watch App */;
-			targetProxy = F9EDFE612DF8A41800478AA3 /* PBXContainerItemProxy */;
-		};
-		F9EDFE692DF8A41800478AA3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = F9EDFE462DF8A41600478AA3 /* LunarisWatch Watch App */;
-			targetProxy = F9EDFE682DF8A41800478AA3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -725,7 +514,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = QU4D5KRV4A;
+				DEVELOPMENT_TEAM = 22LVVYS8R5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -739,7 +528,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "UC-MAD-Meditation";
+				PRODUCT_BUNDLE_IDENTIFIER = "UC-MAD-Meditation2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -754,7 +543,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = QU4D5KRV4A;
+				DEVELOPMENT_TEAM = 22LVVYS8R5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -768,7 +557,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "UC-MAD-Meditation";
+				PRODUCT_BUNDLE_IDENTIFIER = "UC-MAD-Meditation2";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -898,140 +687,6 @@
 			};
 			name = Release;
 		};
-		F9EDFE6C2DF8A41800478AA3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"LunarisWatch Watch App/Preview Content\"";
-				DEVELOPMENT_TEAM = QU4D5KRV4A;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = LunarisWatch;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "UC-MAD-Meditation";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "UC-MAD-Meditation.watchkitapp";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 11.2;
-			};
-			name = Debug;
-		};
-		F9EDFE6D2DF8A41800478AA3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"LunarisWatch Watch App/Preview Content\"";
-				DEVELOPMENT_TEAM = QU4D5KRV4A;
-				ENABLE_PREVIEWS = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = LunarisWatch;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "UC-MAD-Meditation";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "UC-MAD-Meditation.watchkitapp";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 11.2;
-			};
-			name = Release;
-		};
-		F9EDFE702DF8A41800478AA3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "elvernh.LunarisWatch-Watch-AppTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LunarisWatch Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LunarisWatch Watch App";
-				WATCHOS_DEPLOYMENT_TARGET = 11.2;
-			};
-			name = Debug;
-		};
-		F9EDFE712DF8A41800478AA3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "elvernh.LunarisWatch-Watch-AppTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LunarisWatch Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LunarisWatch Watch App";
-				WATCHOS_DEPLOYMENT_TARGET = 11.2;
-			};
-			name = Release;
-		};
-		F9EDFE732DF8A41800478AA3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "elvernh.LunarisWatch-Watch-AppUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				TEST_TARGET_NAME = "LunarisWatch Watch App";
-				WATCHOS_DEPLOYMENT_TARGET = 11.2;
-			};
-			name = Debug;
-		};
-		F9EDFE742DF8A41800478AA3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "elvernh.LunarisWatch-Watch-AppUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = watchos;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				TEST_TARGET_NAME = "LunarisWatch Watch App";
-				WATCHOS_DEPLOYMENT_TARGET = 11.2;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1076,33 +731,6 @@
 			buildConfigurations = (
 				BFAA68EC2DF89138001A4E40 /* Debug */,
 				BFAA68ED2DF89138001A4E40 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		F9EDFE6B2DF8A41800478AA3 /* Build configuration list for PBXNativeTarget "LunarisWatch Watch App" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F9EDFE6C2DF8A41800478AA3 /* Debug */,
-				F9EDFE6D2DF8A41800478AA3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		F9EDFE6F2DF8A41800478AA3 /* Build configuration list for PBXNativeTarget "LunarisWatch Watch AppTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F9EDFE702DF8A41800478AA3 /* Debug */,
-				F9EDFE712DF8A41800478AA3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		F9EDFE722DF8A41800478AA3 /* Build configuration list for PBXNativeTarget "LunarisWatch Watch AppUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F9EDFE732DF8A41800478AA3 /* Debug */,
-				F9EDFE742DF8A41800478AA3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
