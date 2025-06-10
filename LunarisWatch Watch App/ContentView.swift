@@ -1,8 +1,8 @@
 //
 //  ContentView.swift
-//  LunarisWat Watch App
+//  LunarisWatch Watch App
 //
-//  Created by Calvin Laiman on 10/06/25.
+//  Created by Christianto Elvern Haryanto on 11/06/25.
 //
 
 import SwiftUI
