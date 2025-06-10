@@ -27,11 +27,53 @@
 		3F2B2E132DDEB9ED00956565 /* ALP_MAD_Joey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ALP_MAD_Joey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F2B2E202DDEB9EF00956565 /* ALP_MAD_JoeyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ALP_MAD_JoeyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F2B2E2A2DDEB9EF00956565 /* ALP_MAD_JoeyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ALP_MAD_JoeyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFAA68C42DF88533001A4E40 /* WatchConnectivity.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WatchConnectivity.framework; path = System/Library/Frameworks/WatchConnectivity.framework; sourceTree = SDKROOT; };
+		BFAA68E32DF89134001A4E40 /* LunarisIpad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LunarisIpad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		BFAA69012DF89176001A4E40 /* Exceptions for "ALP_MAD_Joey" folder in "LunarisIpad" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Controller/MeditationController.swift,
+				Controller/MeditationSessionController.swift,
+				Controller/MoodController.swift,
+				Controller/NotificationController.swift,
+				Controller/SessionController.swift,
+				Controller/UserController.swift,
+				Data/MeditationData.swift,
+				Model/MeditateSessionModel.swift,
+				Model/MeditationCardModel.swift,
+				Model/MoodModel.swift,
+				Model/ReminderModel.swift,
+				Model/UserModel.swift,
+			);
+			target = BFAA68E22DF89134001A4E40 /* LunarisIpad */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
+		BFAA68F42DF8915C001A4E40 /* Exceptions for "ALP_MAD_Joey" folder in "Compile Sources" phase from "LunarisIpad" target */ = {
+			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
+			buildPhase = BFAA68DF2DF89134001A4E40 /* Sources */;
+			membershipExceptions = (
+				"Audio/Ada Nona Ambon Ga Disini.mp3",
+				"Audio/Don't Listen to Them.mp3",
+				"Audio/Kiss The Rain.mp3",
+				"Audio/Love Me.mp3",
+				"Audio/River Flows In You.mp3",
+				"Audio/Young Gay.mp3",
+			);
+		};
+/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		3F2B2E152DDEB9ED00956565 /* ALP_MAD_Joey */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				BFAA69012DF89176001A4E40 /* Exceptions for "ALP_MAD_Joey" folder in "LunarisIpad" target */,
+				BFAA68F42DF8915C001A4E40 /* Exceptions for "ALP_MAD_Joey" folder in "Compile Sources" phase from "LunarisIpad" target */,
+			);
 			path = ALP_MAD_Joey;
 			sourceTree = "<group>";
 		};
@@ -43,6 +85,16 @@
 		3F2B2E2D2DDEB9EF00956565 /* ALP_MAD_JoeyUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = ALP_MAD_JoeyUITests;
+			sourceTree = "<group>";
+		};
+		BFAA68D12DF88967001A4E40 /* LunarisWat Watch App */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "LunarisWat Watch App";
+			sourceTree = "<group>";
+		};
+		BFAA68E42DF89134001A4E40 /* LunarisIpad */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = LunarisIpad;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -69,6 +121,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BFAA68E02DF89134001A4E40 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -78,6 +137,9 @@
 				3F2B2E152DDEB9ED00956565 /* ALP_MAD_Joey */,
 				3F2B2E232DDEB9EF00956565 /* ALP_MAD_JoeyTests */,
 				3F2B2E2D2DDEB9EF00956565 /* ALP_MAD_JoeyUITests */,
+				BFAA68D12DF88967001A4E40 /* LunarisWat Watch App */,
+				BFAA68E42DF89134001A4E40 /* LunarisIpad */,
+				BFAA68C32DF88533001A4E40 /* Frameworks */,
 				3F2B2E142DDEB9ED00956565 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -88,8 +150,17 @@
 				3F2B2E132DDEB9ED00956565 /* ALP_MAD_Joey.app */,
 				3F2B2E202DDEB9EF00956565 /* ALP_MAD_JoeyTests.xctest */,
 				3F2B2E2A2DDEB9EF00956565 /* ALP_MAD_JoeyUITests.xctest */,
+				BFAA68E32DF89134001A4E40 /* LunarisIpad.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		BFAA68C32DF88533001A4E40 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BFAA68C42DF88533001A4E40 /* WatchConnectivity.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -163,6 +234,28 @@
 			productReference = 3F2B2E2A2DDEB9EF00956565 /* ALP_MAD_JoeyUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		BFAA68E22DF89134001A4E40 /* LunarisIpad */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BFAA68EB2DF89138001A4E40 /* Build configuration list for PBXNativeTarget "LunarisIpad" */;
+			buildPhases = (
+				BFAA68DF2DF89134001A4E40 /* Sources */,
+				BFAA68E02DF89134001A4E40 /* Frameworks */,
+				BFAA68E12DF89134001A4E40 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				BFAA68E42DF89134001A4E40 /* LunarisIpad */,
+			);
+			name = LunarisIpad;
+			packageProductDependencies = (
+			);
+			productName = LunarisIpad;
+			productReference = BFAA68E32DF89134001A4E40 /* LunarisIpad.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -184,6 +277,9 @@
 						CreatedOnToolsVersion = 16.3;
 						TestTargetID = 3F2B2E122DDEB9ED00956565;
 					};
+					BFAA68E22DF89134001A4E40 = {
+						CreatedOnToolsVersion = 16.3;
+					};
 				};
 			};
 			buildConfigurationList = 3F2B2E0E2DDEB9ED00956565 /* Build configuration list for PBXProject "ALP_MAD_Joey" */;
@@ -203,6 +299,7 @@
 				3F2B2E122DDEB9ED00956565 /* ALP_MAD_Joey */,
 				3F2B2E1F2DDEB9EF00956565 /* ALP_MAD_JoeyTests */,
 				3F2B2E292DDEB9EF00956565 /* ALP_MAD_JoeyUITests */,
+				BFAA68E22DF89134001A4E40 /* LunarisIpad */,
 			);
 		};
 /* End PBXProject section */
@@ -229,6 +326,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BFAA68E12DF89134001A4E40 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -247,6 +351,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		3F2B2E262DDEB9EF00956565 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BFAA68DF2DF89134001A4E40 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -395,10 +506,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 22LVVYS8R5;
+				DEVELOPMENT_TEAM = QU4D5KRV4A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = Lunaris;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -410,7 +520,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "UC-MAD";
+				PRODUCT_BUNDLE_IDENTIFIER = "UC-MAD-Meditation";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -425,10 +535,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 22LVVYS8R5;
+				DEVELOPMENT_TEAM = QU4D5KRV4A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = Lunaris;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -440,7 +549,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "UC-MAD";
+				PRODUCT_BUNDLE_IDENTIFIER = "UC-MAD-Meditation";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -516,6 +625,60 @@
 			};
 			name = Release;
 		};
+		BFAA68EC2DF89138001A4E40 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = calvin.LunarisIpad;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BFAA68ED2DF89138001A4E40 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = calvin.LunarisIpad;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -551,6 +714,15 @@
 			buildConfigurations = (
 				3F2B2E3B2DDEB9EF00956565 /* Debug */,
 				3F2B2E3C2DDEB9EF00956565 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BFAA68EB2DF89138001A4E40 /* Build configuration list for PBXNativeTarget "LunarisIpad" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFAA68EC2DF89138001A4E40 /* Debug */,
+				BFAA68ED2DF89138001A4E40 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
