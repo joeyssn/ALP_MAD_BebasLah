@@ -25,3 +25,29 @@ class MeditationCardModel {
         self.med_description = med_description
     }
 }
+
+// MARK: - WatchConnectivity Support
+extension MeditationCardModel: WatchTransferable {
+    var dictionaryRepresentation: [String: Any] {
+        var dict: [String: Any] = [
+            "meditationCardId": meditationCardId,
+            "imageName": imageName,
+            "title": title,
+            "med_description": med_description,
+            "isFavorite": isFavorite
+        ]
+
+        if let session = meditationSession {
+            dict["meditationSession"] = [
+                "meditationSessionId": session.meditationSessionId ?? -1,
+                "date": session.date.timeIntervalSince1970,
+                "soundFile": session.soundFile,
+                "duration": session.duration,
+                "startTime": session.startTime,
+                "endTime": session.endTime
+            ]
+        }
+
+        return dict
+    }
+}

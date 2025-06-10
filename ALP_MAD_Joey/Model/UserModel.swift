@@ -16,9 +16,21 @@ class UserModel {
     @Relationship var moods: [MoodModel] = []
     @Relationship var reminder: [ReminderModel] = []
     @Relationship var meditation: [MeditateSessionModel] = []
+    
     init(userId: Int, username: String, password: String) {
         self.userId = userId
         self.username = username
         self.password = password
+    }
+}
+
+// MARK: - WatchConnectivity Support
+extension UserModel: WatchTransferable {
+    var dictionaryRepresentation: [String: Any] {
+        return [
+            "userId": userId ?? -1, // Fallback if userId is nil
+            "username": username,
+            "password": password
+        ]
     }
 }

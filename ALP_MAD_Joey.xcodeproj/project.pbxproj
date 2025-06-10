@@ -90,6 +90,26 @@
 			);
 			target = BFAA68E22DF89134001A4E40 /* LunarisIpad */;
 		};
+		F9ED01682DF8B8BB00478AA3 /* Exceptions for "LunarisWatch Watch App" folder in "ALP_MAD_Joey" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				WatchLoginView.swift,
+				WatchSessionViewModel.swift,
+			);
+			target = 3F2B2E122DDEB9ED00956565 /* ALP_MAD_Joey */;
+		};
+		F9ED016E2DF8BCA200478AA3 /* Exceptions for "ALP_MAD_Joey" folder in "LunarisWatch Watch App" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Model/MeditateSessionModel.swift,
+				Model/MeditationCardModel.swift,
+				Model/MoodModel.swift,
+				Model/ReminderModel.swift,
+				Model/UserModel.swift,
+				WatchTransferable.swift,
+			);
+			target = BF87E8152DF8B5FB00538B33 /* LunarisWatch Watch App */;
+		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
@@ -113,6 +133,7 @@
 			exceptions = (
 				BFAA69012DF89176001A4E40 /* Exceptions for "ALP_MAD_Joey" folder in "LunarisIpad" target */,
 				BFAA68F42DF8915C001A4E40 /* Exceptions for "ALP_MAD_Joey" folder in "Compile Sources" phase from "LunarisIpad" target */,
+				F9ED016E2DF8BCA200478AA3 /* Exceptions for "ALP_MAD_Joey" folder in "LunarisWatch Watch App" target */,
 			);
 			path = ALP_MAD_Joey;
 			sourceTree = "<group>";
@@ -129,6 +150,9 @@
 		};
 		BF87E8172DF8B5FB00538B33 /* LunarisWatch Watch App */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				F9ED01682DF8B8BB00478AA3 /* Exceptions for "LunarisWatch Watch App" folder in "ALP_MAD_Joey" target */,
+			);
 			path = "LunarisWatch Watch App";
 			sourceTree = "<group>";
 		};
@@ -610,7 +634,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 22LVVYS8R5;
+				DEVELOPMENT_TEAM = QU4D5KRV4A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -624,7 +648,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "UC-MAD-Meditation2";
+				PRODUCT_BUNDLE_IDENTIFIER = "UC-MAD-Meditation3";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -639,7 +663,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 22LVVYS8R5;
+				DEVELOPMENT_TEAM = QU4D5KRV4A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -653,7 +677,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "UC-MAD-Meditation2";
+				PRODUCT_BUNDLE_IDENTIFIER = "UC-MAD-Meditation3";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -736,7 +760,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 22LVVYS8R5;
+				DEVELOPMENT_TEAM = QU4D5KRV4A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = LunarisWatch;
@@ -747,7 +771,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "UC-MAD-Meditation2.watchkitapp";
+				PRODUCT_BUNDLE_IDENTIFIER = "UC-MAD-Meditation3.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
@@ -765,7 +789,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 22LVVYS8R5;
+				DEVELOPMENT_TEAM = QU4D5KRV4A;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = LunarisWatch;
@@ -776,7 +800,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "UC-MAD-Meditation2.watchkitapp";
+				PRODUCT_BUNDLE_IDENTIFIER = "UC-MAD-Meditation3.watchkitapp";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;

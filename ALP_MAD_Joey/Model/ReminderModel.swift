@@ -14,3 +14,16 @@ struct ReminderModel: Identifiable,Codable {
     var isActive: Bool
     var reminderText: String
 }
+
+// MARK: - WatchConnectivity Support
+extension ReminderModel: WatchTransferable {
+    var dictionaryRepresentation: [String: Any] {
+        return [
+            "id": id.uuidString,
+            "userID": userID.uuidString,
+            "time": time,
+            "isActive": isActive,
+            "reminderText": reminderText
+        ]
+    }
+}

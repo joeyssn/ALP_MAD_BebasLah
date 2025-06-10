@@ -41,3 +41,17 @@ class MeditateSessionModel {
         self.endTime = endTime
     }
 }
+
+// MARK: - WatchConnectivity Support
+extension MeditateSessionModel: WatchTransferable {
+    var dictionaryRepresentation: [String: Any] {
+        return [
+            "meditationSessionId": meditationSessionId ?? -1,
+            "date": date.timeIntervalSince1970,
+            "soundFile": soundFile,
+            "duration": duration,
+            "startTime": startTime,
+            "endTime": endTime
+        ]
+    }
+}
