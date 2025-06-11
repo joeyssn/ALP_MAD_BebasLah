@@ -74,6 +74,7 @@
 				Model/MoodModel.swift,
 				Model/ReminderModel.swift,
 				Model/UserModel.swift,
+				SoundManager.swift,
 				ViewModel/MeditationSessionViewModel.swift,
 				ViewModel/MeditationViewModel.swift,
 				ViewModel/MoodViewModel.swift,

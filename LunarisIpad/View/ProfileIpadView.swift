@@ -40,7 +40,7 @@ struct ProfileIpadView: View {
 
                         Spacer()
 
-                        NavigationLink(destination: EditProfileView(user: user)) {
+                        NavigationLink(destination: EditProfileIpadView(user: user)) {
                             Image(systemName: "pencil")
                                 .foregroundColor(.white)
                                 .font(.title)
@@ -124,7 +124,7 @@ struct ProfileIpadView: View {
                             VStack(spacing: 40) {
                                 // First Row
                                 HStack(spacing: 30) {
-                                    NavigationLink(destination: NotificationSettingsView()) {
+                                    NavigationLink(destination: NotificationSettingIpadView()) {
                                         ProfileMenuItemIpad(
                                             icon: "bell.fill",
                                             title: "Notifications",
@@ -133,7 +133,7 @@ struct ProfileIpadView: View {
                                     }
                                     .buttonStyle(PlainButtonStyle())
 
-                                    NavigationLink(destination: MoodLogView()) {
+                                    NavigationLink(destination: MoodLogIpadView()) {
                                         ProfileMenuItemIpad(
                                             icon: "clock.fill",
                                             title: "History",
@@ -154,7 +154,7 @@ struct ProfileIpadView: View {
                                     }
                                     .buttonStyle(PlainButtonStyle())
 
-                                    NavigationLink(destination: AboutPhoneView()) {
+                                    NavigationLink(destination: AboutPhoneIpadView()) {
                                         ProfileMenuItemIpad(
                                             icon: "info.circle.fill",
                                             title: "About",

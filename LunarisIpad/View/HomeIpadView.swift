@@ -48,7 +48,7 @@ struct HomeIpadView: View {
                             HStack {
                                 Spacer()
                                 HStack(spacing: 24) {
-                                    NavigationLink(destination: MoodLogView()) {
+                                    NavigationLink(destination: MoodLogIpadView()) {
                                         Image(systemName: "face.smiling")
                                             .font(.title2)
                                             .foregroundColor(.white)
@@ -57,7 +57,7 @@ struct HomeIpadView: View {
                                             .clipShape(Circle())
                                     }
                                     
-                                    NavigationLink(destination: NotificationSettingsView()) {
+                                    NavigationLink(destination: NotificationSettingIpadView()) {
                                         Image(systemName: "bell")
                                             .font(.title2)
                                             .foregroundColor(.white)
@@ -66,7 +66,7 @@ struct HomeIpadView: View {
                                             .clipShape(Circle())
                                     }
                                     
-                                    NavigationLink(destination: ProfileView()) {
+                                    NavigationLink(destination: ProfileIpadView()) {
                                         Image(systemName: "gearshape")
                                             .font(.title2)
                                             .foregroundColor(.white)
@@ -150,7 +150,7 @@ struct HomeIpadView: View {
                                     spacing: 12
                                 ) {
                                     ForEach(MeditationData.meditationCards, id: \.title) { card in
-                                        NavigationLink(destination: SessionDetailView(card: card)) {
+                                        NavigationLink(destination: SessionDetailIpadView(card: card)) {
                                             MeditationCardIpadView(card: card)
                                                 .shadow(color: .black.opacity(0.2), radius: 4, x: 0, y: 2)
                                         }

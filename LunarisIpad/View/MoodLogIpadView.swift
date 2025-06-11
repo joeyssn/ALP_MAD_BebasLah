@@ -167,6 +167,17 @@ struct MoodLogIpadView: View {
     }
 }
 
+func colorForMood(_ mood: String) -> Color {
+    switch mood.lowercased() {
+    case "unhappy": return .red
+    case "sad": return .blue
+    case "normal": return .purple
+    case "good": return .green
+    case "happy": return .yellow
+    default: return .gray
+    }
+}
+
 //#Preview {
 //    let dummySession = SessionController()
 //    dummySession.login(user: UserModel(userId: 1, username: "Calvin", password: "123"))
