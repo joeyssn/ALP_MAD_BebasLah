@@ -1,97 +1,77 @@
-//
-//  MoodLogIpadView.swift
-//  ALP_MAD_Joey
-//
-//  Created by Calvin Laiman on 11/06/25.
-//
-
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct MoodLogIpadView: View {
     @Environment(\.modelContext) private var modelContext
-    @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var sessionViewModel: SessionViewModel
-    @EnvironmentObject var moodViewModel: MoodViewModel
+    @EnvironmentObject var sessionController: SessionViewModel
+    @EnvironmentObject var moodController: MoodViewModel
+    @Environment(\.dismiss) private var dismiss
 
     @State private var moods: [MoodModel] = []
     @State private var showMoodView = false
 
     var body: some View {
-        ZStack {
-            Image("Login")
-                .resizable()
-                .scaledToFill()
-                .ignoresSafeArea()
+        GeometryReader { geometry in
+            ZStack {
+                // Background
+                Image("Login")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: geometry.size.width, height: geometry.size.height)
+                    .clipped()
+                    .ignoresSafeArea()
 
-            VStack(spacing: 0) {
-                HStack {
-                    Button(action: {
-                        presentationMode.wrappedValue.dismiss()
-                    }) {
-                        HStack(spacing: 8) {
-                            Image(systemName: "chevron.left")
-                                .font(.title)
-                                .fontWeight(.medium)
+                VStack(spacing: 16) { // Reduced spacing from 20 to 16
+                    // Header
+                    HStack {
+                        Button("Back") {
+                            dismiss()
                         }
                         .foregroundColor(.white)
+                        .buttonStyle(.plain)
+
+                        Spacer()
                     }
+                    .padding(.horizontal, 20)
+                    .padding(.top, 10) // Reduced top padding
 
-                    Spacer()
-                }
-                .padding(.horizontal, 40)
-                .padding(.top, 40)
-                .padding(.bottom, 30)
-
-                VStack(spacing: 40) {
-                    Spacer()
-
-                    VStack(spacing: 12) {
+                    // Title
+                    VStack(spacing: 8) { // Reduced spacing
                         Text("Moods")
-                            .font(.system(size: 48, weight: .bold))
+                            .font(.largeTitle)
+                            .fontWeight(.bold)
                             .foregroundColor(.white)
 
                         Text("See all of your logged moods here")
-                            .font(.system(size: 20, weight: .medium))
+                            .font(.subheadline)
                             .foregroundColor(.white.opacity(0.7))
-                            .multilineTextAlignment(.center)
                     }
-                    .padding(.horizontal)
 
-                    Spacer()
-
+                    // Content - Make this flexible
                     if moods.isEmpty {
-                        VStack(spacing: 20) {
-                            ZStack {
-                                Circle()
-                                    .fill(Color.white.opacity(0.1))
-                                    .frame(width: 140, height: 140)
-                                    .blur(radius: 20)
-
-                                Image(systemName: "face.smiling")
-                                    .font(.system(size: 70))
-                                    .foregroundColor(.white.opacity(0.6))
-                            }
+                        VStack(spacing: 16) { // Reduced spacing
+                            Image(systemName: "face.smiling")
+                                .font(.system(size: 50)) // Reduced size
+                                .foregroundColor(.white.opacity(0.6))
 
                             Text("No moods logged yet")
-                                .font(.system(size: 22, weight: .medium))
+                                .font(.headline)
                                 .foregroundColor(.white.opacity(0.8))
 
-                            Text("Start tracking your daily emotions\nand see your patterns over time")
-                                .font(.system(size: 16))
+                            Text("Start tracking your daily emotions")
+                                .font(.subheadline)
                                 .foregroundColor(.white.opacity(0.6))
-                                .multilineTextAlignment(.center)
-                                .lineSpacing(4)
                         }
-                        .padding(.horizontal)
+                        .frame(maxWidth: .infinity)
+                        .frame(maxHeight: .infinity) // Allow it to expand
                     } else {
                         ScrollView {
-                            VStack(spacing: 20) {
+                            LazyVStack(spacing: 12) { // Reduced spacing
                                 ForEach(moods, id: \.id) { mood in
                                     HStack {
                                         Circle()
                                             .fill(colorForMood(mood.moodName))
-                                            .frame(width: 20, height: 20)
+                                            .frame(width: 16, height: 16)
 
                                         Text(mood.moodName)
                                             .foregroundColor(.white)
@@ -101,72 +81,64 @@ struct MoodLogIpadView: View {
 
                                         Text(mood.dateLogged.formatted(date: .abbreviated, time: .shortened))
                                             .foregroundColor(.white.opacity(0.6))
-                                            .font(.subheadline)
+                                            .font(.caption)
                                     }
-                                    .padding()
-                                    .background(Color.white.opacity(0.05))
-                                    .cornerRadius(14)
-                                    .padding(.horizontal, 80)
+                                    .padding(.horizontal, 16)
+                                    .padding(.vertical, 12)
+                                    .background(Color.white.opacity(0.1))
+                                    .cornerRadius(12)
                                 }
                             }
+                            .padding(.horizontal, 20)
                         }
-                        .frame(maxHeight: 400)
+                        .frame(maxHeight: min(geometry.size.height * 0.4, 300)) // Responsive height
                     }
 
-                    Spacer()
-
-                    Button(action: {
+                    // Simple Add Mood Button - Always at bottom
+                    Button("Add Your Mood") {
                         showMoodView = true
-                    }) {
-                        HStack(spacing: 14) {
-                            Image(systemName: "plus.circle.fill")
-                                .font(.title)
-
-                            Text("Add Your Mood")
-                                .font(.system(size: 20, weight: .semibold))
-                        }
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .frame(height: 60)
-                        .background(
-                            LinearGradient(
-                                gradient: Gradient(colors: [
-                                    Color.pink.opacity(0.8),
-                                    Color.purple.opacity(0.9),
-                                    Color.indigo.opacity(0.8),
-                                ]),
-                                startPoint: .leading,
-                                endPoint: .trailing
-                            )
-                        )
-                        .clipShape(RoundedRectangle(cornerRadius: 18))
-                        .shadow(color: Color.purple.opacity(0.4), radius: 20, x: 0, y: 10)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 18)
-                                .stroke(Color.white.opacity(0.2), lineWidth: 1)
-                        )
                     }
-                    .padding(.horizontal, 100)
-                    .padding(.bottom, 80)
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 50)
+                    .background(Color.purple)
+                    .cornerRadius(12)
+//                    .padding(.horizontal, 20)
+//                    .padding(.bottom, 20)
                 }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
-        .navigationBarHidden(true)
-        .fullScreenCover(isPresented: $showMoodView, onDismiss: fetchMoods) {
+        // Remove the fixed frame constraints
+        .sheet(isPresented: $showMoodView, onDismiss: {
+            fetchMoods()
+        }) {
             MoodIpadView()
+                .environmentObject(sessionController)
+                .environmentObject(moodController)
         }
-        .onAppear(perform: fetchMoods)
+        .onAppear {
+            fetchMoods()
+        }
     }
 
     private func fetchMoods() {
+        guard let userId = sessionController.currentUser?.userId else {
+            print("No user logged in.")
+            moods = []
+            return
+        }
+
         do {
-            moods = try moodViewModel.getMoods(for: sessionViewModel.currentUser?.userId ?? -1)
+            moods = try moodController.getMoods(for: userId)
         } catch {
             print("Failed to fetch moods: \(error.localizedDescription)")
         }
     }
 }
 
+// Helper for mood color
 func colorForMood(_ mood: String) -> Color {
     switch mood.lowercased() {
     case "unhappy": return .red
@@ -178,12 +150,15 @@ func colorForMood(_ mood: String) -> Color {
     }
 }
 
-//#Preview {
-//    let dummySession = SessionController()
-//    dummySession.login(user: UserModel(userId: 1, username: "Calvin", password: "123"))
-//
-//    return MoodLogIpadView()
-//        .environmentObject(dummySession)
-//        .environmentObject(MoodController())
-//        .modelContainer(for: [UserModel.self], inMemory: true)
-//}
+#Preview {
+    let session = SessionViewModel()
+    session.currentUser = UserModel(
+        userId: 1, username: "Test", password: "123")
+
+    let context = try! ModelContainer(for: MoodModel.self).mainContext
+    let moodViewModel = MoodViewModel(context: context)
+
+    return MoodLogIpadView()
+        .environmentObject(session)
+        .environmentObject(moodViewModel)
+}

@@ -1,10 +1,3 @@
-//
-//  NotificationSettingView.swift
-//  ALP_MAD_Joey
-//
-//  Created by Christianto Elvern Haryanto on 03/06/25.
-//
-
 import SwiftUI
 
 struct NotificationSettingsView: View {
@@ -12,6 +5,31 @@ struct NotificationSettingsView: View {
     @AppStorage("reminderTime") private var reminderTime = "08:00 AM"
     @Environment(\.presentationMode) private var presentationMode
     @State private var showPermissionAlert = false
+
+    private var reminderBinding: Binding<Bool> {
+        Binding<Bool>(
+            get: { reminderEnabled },
+            set: { newValue in
+                if newValue {
+                    NotificationViewModel.shared.requestPermission { granted in
+                        DispatchQueue.main.async {
+                            if granted {
+                                reminderEnabled = true
+                                NotificationViewModel.shared.scheduleDailyNotification(at: reminderTime, for: "User")
+                            } else {
+                                print("Notification permission denied by user.")
+                                showPermissionAlert = true
+                                reminderEnabled = false
+                            }
+                        }
+                    }
+                } else {
+                    reminderEnabled = false
+                    NotificationViewModel.shared.cancelNotification()
+                }
+            }
+        )
+    }
 
     var body: some View {
         ZStack {
@@ -42,29 +60,7 @@ struct NotificationSettingsView: View {
                 .padding(.bottom, 30)
 
                 VStack(spacing: 20) {
-                    Toggle(isOn: Binding(
-                        get: { reminderEnabled },
-                        set: { newValue in
-                            if newValue {
-                                // Use NotificationController
-                                NotificationViewModel.shared.requestAuthorization { granted in
-                                    if granted {
-                                        reminderEnabled = true
-                                        // Use NotificationController
-                                        NotificationViewModel.shared.scheduleDailyMeditationReminder(timeString: reminderTime)
-                                    } else {
-                                        print("Notification permission denied by user.")
-                                        showPermissionAlert = true
-                                        reminderEnabled = false
-                                    }
-                                }
-                            } else {
-                                reminderEnabled = false
-                                // Use NotificationController
-                                NotificationViewModel.shared.cancelMeditationReminder()
-                            }
-                        }
-                    )) {
+                    Toggle(isOn: reminderBinding) {
                         Text("Enable Daily Reminder")
                             .foregroundColor(.white)
                             .font(.headline)
@@ -75,6 +71,7 @@ struct NotificationSettingsView: View {
                         VStack(spacing: 10) {
                             Text("Reminder Time")
                                 .foregroundColor(.white)
+
                             DatePicker("",
                                        selection: Binding(
                                         get: {
@@ -104,6 +101,7 @@ struct NotificationSettingsView: View {
                         )
                 )
                 .padding(.horizontal)
+
                 Spacer()
             }
         }
@@ -111,17 +109,14 @@ struct NotificationSettingsView: View {
         .onChange(of: reminderTime) { newTimeValue in
             if reminderEnabled {
                 print("Reminder time changed to \(newTimeValue), rescheduling...")
-                // Use NotificationController
-                NotificationViewModel.shared.scheduleDailyMeditationReminder(timeString: newTimeValue)
+                NotificationViewModel.shared.scheduleDailyNotification(at: newTimeValue, for: "User")
             }
         }
         .onAppear {
             if reminderEnabled {
-                // Use NotificationController
-                NotificationViewModel.shared.requestAuthorization { granted in
+                NotificationViewModel.shared.requestPermission { granted in
                     if granted {
-                        // Use NotificationController
-                        NotificationViewModel.shared.scheduleDailyMeditationReminder(timeString: reminderTime)
+                        NotificationViewModel.shared.scheduleDailyNotification(at: reminderTime, for: "User")
                     } else {
                         DispatchQueue.main.async {
                             reminderEnabled = false
@@ -131,11 +126,12 @@ struct NotificationSettingsView: View {
             }
         }
         .alert("Permission Denied", isPresented: $showPermissionAlert) {
-            Button("Open Settings", action: {
-                if let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) {
+            Button("Open Settings") {
+                if let url = URL(string: UIApplication.openSettingsURLString),
+                   UIApplication.shared.canOpenURL(url) {
                     UIApplication.shared.open(url)
                 }
-            })
+            }
             Button("Cancel", role: .cancel) {}
         } message: {
             Text("To enable reminders, please allow notification permissions in your iPhone's Settings app.")

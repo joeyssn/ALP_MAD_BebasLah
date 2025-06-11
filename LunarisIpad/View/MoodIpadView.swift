@@ -1,12 +1,12 @@
 //
-//  MoodIpadView.swift
+//  MoodView.swift
 //  ALP_MAD_Joey
 //
-//  Created by Calvin Laiman on 11/06/25.
+//  Created by Calvin Laiman on 03/06/25.
 //
 
-import SwiftData
 import SwiftUI
+import SwiftData
 
 struct MoodIpadView: View {
     @State private var selectedMood: MoodType = .normal
@@ -14,8 +14,8 @@ struct MoodIpadView: View {
     @State private var rotationAnimation = 0.0
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.modelContext) var modelContext
-    @EnvironmentObject var sessionViewModel: SessionViewModel
-    @EnvironmentObject var moodViewModel: MoodViewModel
+    @EnvironmentObject var sessionController: SessionViewModel
+    @EnvironmentObject var moodController: MoodViewModel
 
     private let moods: [MoodType] = [.unhappy, .sad, .normal, .good, .happy]
 
@@ -26,26 +26,28 @@ struct MoodIpadView: View {
                 .scaledToFill()
                 .ignoresSafeArea()
 
-            VStack(spacing: 60) {
+            ScrollView {
+                VStack(spacing: 30) {
                 HStack {
                     Button(action: {
                         presentationMode.wrappedValue.dismiss()
                     }) {
                         Image(systemName: "chevron.left")
                             .foregroundColor(.white)
-                            .font(.title)
+                            .font(.title2)
                     }
 
                     Spacer()
                 }
-                .padding(.horizontal, 40)
-                .padding(.top, 40)
+                .padding(.horizontal)
+                .padding(.top, 20)
 
                 Spacer()
 
                 Text("How do you feel today?")
                     .foregroundColor(.white)
-                    .font(.system(size: 34, weight: .medium))
+                    .font(.title)
+                    .fontWeight(.medium)
                     .multilineTextAlignment(.center)
                     .opacity(pulseAnimation ? 0.8 : 1.0)
                     .animation(
@@ -58,7 +60,7 @@ struct MoodIpadView: View {
                 ZStack {
                     Circle()
                         .fill(selectedMood.color.opacity(0.2))
-                        .frame(width: 260, height: 260)
+                        .frame(width: 180, height: 180)
                         .scaleEffect(pulseAnimation ? 1.1 : 1.0)
                         .animation(
                             .easeInOut(duration: 2.0).repeatForever(
@@ -69,7 +71,7 @@ struct MoodIpadView: View {
 
                     Circle()
                         .fill(selectedMood.color.opacity(0.4))
-                        .frame(width: 200, height: 200)
+                        .frame(width: 140, height: 140)
                         .scaleEffect(pulseAnimation ? 1.05 : 1.0)
                         .animation(
                             .easeInOut(duration: 1.5).repeatForever(
@@ -80,10 +82,12 @@ struct MoodIpadView: View {
 
                     Circle()
                         .fill(selectedMood.color)
-                        .frame(width: 160, height: 160)
+                        .frame(width: 100, height: 100)
                         .shadow(
                             color: selectedMood.color.opacity(0.6),
-                            radius: 20
+                            radius: 20,
+                            x: 0,
+                            y: 0
                         )
                         .scaleEffect(pulseAnimation ? 1.02 : 1.0)
                         .animation(
@@ -98,14 +102,15 @@ struct MoodIpadView: View {
                             RadialGradient(
                                 gradient: Gradient(colors: [
                                     Color.white.opacity(0.6),
-                                    Color.white.opacity(0.2), Color.clear,
+                                    Color.white.opacity(0.2),
+                                    Color.clear,
                                 ]),
                                 center: .topLeading,
                                 startRadius: 10,
                                 endRadius: 60
                             )
                         )
-                        .frame(width: 160, height: 160)
+                        .frame(width: 100, height: 100)
                         .rotationEffect(.degrees(rotationAnimation))
                         .animation(
                             .linear(duration: 8.0).repeatForever(
@@ -114,14 +119,13 @@ struct MoodIpadView: View {
                             value: rotationAnimation
                         )
                 }
-                .padding(.vertical, 20)
                 .onAppear {
                     pulseAnimation = true
                     rotationAnimation = 360
                 }
 
-                VStack(spacing: 24) {
-                    HStack(spacing: 20) {
+                VStack(spacing: 15) {
+                    HStack(spacing: 8) {
                         ForEach(moods, id: \.self) { mood in
                             VStack(spacing: 8) {
                                 Button(action: {
@@ -141,7 +145,7 @@ struct MoodIpadView: View {
                                                     mood.color,
                                                     lineWidth: 3
                                                 )
-                                                .frame(width: 40, height: 40)
+                                                .frame(width: 35, height: 35)
                                                 .scaleEffect(
                                                     pulseAnimation ? 1.1 : 1.0
                                                 )
@@ -156,7 +160,7 @@ struct MoodIpadView: View {
 
                                         Circle()
                                             .fill(mood.color)
-                                            .frame(width: 28, height: 28)
+                                            .frame(width: 24, height: 24)
                                             .shadow(
                                                 color: mood.color.opacity(0.5),
                                                 radius: selectedMood == mood
@@ -178,7 +182,7 @@ struct MoodIpadView: View {
                                         selectedMood == mood
                                             ? .white : .white.opacity(0.7)
                                     )
-                                    .font(.callout)
+                                    .font(.caption)
                                     .fontWeight(
                                         selectedMood == mood
                                             ? .semibold : .medium
@@ -193,16 +197,21 @@ struct MoodIpadView: View {
                                         ),
                                         value: selectedMood
                                     )
+                                    .fixedSize(
+                                        horizontal: true,
+                                        vertical: false
+                                    )
+                                    .multilineTextAlignment(.center)
                             }
                             .frame(maxWidth: .infinity)
                         }
                     }
-                    .padding(.horizontal, 100)
+                    .padding(.horizontal, 16)
 
                     Rectangle()
                         .fill(selectedMood.color.opacity(0.4))
                         .frame(height: 2)
-                        .padding(.horizontal, 120)
+                        .padding(.horizontal, 40)
                         .animation(
                             .easeInOut(duration: 0.5),
                             value: selectedMood
@@ -214,9 +223,9 @@ struct MoodIpadView: View {
                 Button(action: {
                     presentationMode.wrappedValue.dismiss()
                     do {
-                        try moodViewModel.logMood(
+                        try moodController.logMood(
                             moodName: selectedMood.title,
-                            for: sessionViewModel.currentUser?.userId ?? -1
+                            for: sessionController.currentUser?.userId ?? -1
                         )
                     } catch {
                         print(
@@ -233,7 +242,7 @@ struct MoodIpadView: View {
                     }
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
-                    .frame(height: 60)
+                    .frame(height: 55)
                     .background(
                         LinearGradient(
                             gradient: Gradient(colors: [
@@ -245,7 +254,7 @@ struct MoodIpadView: View {
                             endPoint: .trailing
                         )
                     )
-                    .clipShape(RoundedRectangle(cornerRadius: 20))
+                    .clipShape(RoundedRectangle(cornerRadius: 16))
                     .shadow(
                         color: selectedMood.color.opacity(0.4),
                         radius: 10,
@@ -260,10 +269,10 @@ struct MoodIpadView: View {
                         value: pulseAnimation
                     )
                 }
-                .padding(.horizontal, 100)
-                .padding(.bottom, 80)
+                .padding(.horizontal, 24)
+                .padding(.bottom, 30)
+                }
             }
-            .navigationBarHidden(true)
         }
     }
 }
@@ -291,12 +300,7 @@ enum MoodType: CaseIterable {
         }
     }
 }
-//#Preview {
-//    let dummySession = SessionController()
-//    dummySession.login(user: UserModel(userId: 1, username: "Calvin", password: "123"))
-//
-//    MoodIpadView()
-//        .environmentObject(dummySession)
-//        .environmentObject(MoodController())
-//        .modelContainer(for: [UserModel.self], inMemory: true)
-//}
+
+#Preview {
+    MoodIpadView()
+}
