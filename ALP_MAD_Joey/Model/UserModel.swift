@@ -23,14 +23,3 @@ class UserModel {
         self.password = password
     }
 }
-
-// MARK: - WatchConnectivity Support
-extension UserModel: WatchTransferable {
-    var dictionaryRepresentation: [String: Any] {
-        return [
-            "userId": userId ?? -1, // Fallback if userId is nil
-            "username": username,
-            "password": password
-        ]
-    }
-}

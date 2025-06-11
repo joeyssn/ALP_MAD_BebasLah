@@ -137,7 +137,7 @@ struct SessionDetailView: View {
                         .padding(.top, 24)
                         .padding(.bottom, 32)
                         // Pass both card and matching session
-                        .fullScreenCover(isPresented: $showSessionStart) {
+                        .sheet(isPresented: $showSessionStart) {
                             if let session = matchingSession {
                                 SessionStartView(
                                     card: card, cardSession: session)

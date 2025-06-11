@@ -32,7 +32,7 @@ struct HomeView: View {
     }
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 Image("Login")
                     .resizable()

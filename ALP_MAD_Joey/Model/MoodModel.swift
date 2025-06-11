@@ -22,15 +22,3 @@ class MoodModel {
         self.userId = userId
     }
 }
-
-// MARK: - WatchConnectivity Support
-extension MoodModel: WatchTransferable {
-    var dictionaryRepresentation: [String: Any] {
-        return [
-            "id": id.uuidString,
-            "moodName": moodName,
-            "dateLogged": dateLogged.timeIntervalSince1970, // Use timestamp for cross-device safety
-            "userId": userId
-        ]
-    }
-}
