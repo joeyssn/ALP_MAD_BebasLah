@@ -64,12 +64,6 @@
 		BFAA69012DF89176001A4E40 /* Exceptions for "ALP_MAD_Joey" folder in "LunarisIpad" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Controller/MeditationController.swift,
-				Controller/MeditationSessionController.swift,
-				Controller/MoodController.swift,
-				Controller/NotificationController.swift,
-				Controller/SessionController.swift,
-				Controller/UserController.swift,
 				Data/MeditationData.swift,
 				Model/MeditateSessionModel.swift,
 				Model/MeditationCardModel.swift,
@@ -77,6 +71,12 @@
 				Model/ReminderModel.swift,
 				Model/UserModel.swift,
 				SoundManager.swift,
+				ViewModel/MeditationSessionViewModel.swift,
+				ViewModel/MeditationViewModel.swift,
+				ViewModel/MoodViewModel.swift,
+				ViewModel/NotificationViewModel.swift,
+				ViewModel/SessionViewModel.swift,
+				ViewModel/UserViewModel.swift,
 			);
 			target = BFAA68E22DF89134001A4E40 /* LunarisIpad */;
 		};
