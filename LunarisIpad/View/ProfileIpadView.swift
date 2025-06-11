@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ProfileIpadView: View {
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var session: SessionController
+    @EnvironmentObject var session: SessionViewModel
     @Environment(\.modelContext) private var context
 
     var body: some View {
@@ -40,7 +40,7 @@ struct ProfileIpadView: View {
 
                         Spacer()
 
-                        NavigationLink(destination: EditProfileView(user: user)) {
+                        NavigationLink(destination: EditProfileIpadView(user: user)) {
                             Image(systemName: "pencil")
                                 .foregroundColor(.white)
                                 .font(.title)
@@ -124,7 +124,7 @@ struct ProfileIpadView: View {
                             VStack(spacing: 40) {
                                 // First Row
                                 HStack(spacing: 30) {
-                                    NavigationLink(destination: NotificationSettingsView()) {
+                                    NavigationLink(destination: NotificationSettingIpadView()) {
                                         ProfileMenuItemIpad(
                                             icon: "bell.fill",
                                             title: "Notifications",
@@ -133,7 +133,7 @@ struct ProfileIpadView: View {
                                     }
                                     .buttonStyle(PlainButtonStyle())
 
-                                    NavigationLink(destination: MoodLogView()) {
+                                    NavigationLink(destination: MoodLogIpadView()) {
                                         ProfileMenuItemIpad(
                                             icon: "clock.fill",
                                             title: "History",
@@ -154,7 +154,7 @@ struct ProfileIpadView: View {
                                     }
                                     .buttonStyle(PlainButtonStyle())
 
-                                    NavigationLink(destination: AboutPhoneView()) {
+                                    NavigationLink(destination: AboutPhoneIpadView()) {
                                         ProfileMenuItemIpad(
                                             icon: "info.circle.fill",
                                             title: "About",
@@ -248,5 +248,5 @@ struct ProfileMenuItemIpad: View {
 
 #Preview {
     ProfileIpadView()
-        .environmentObject(SessionController())
+        .environmentObject(SessionViewModel())
 }

@@ -5,8 +5,8 @@
 //  Created by Calvin Laiman on 11/06/25.
 //
 
-import SwiftUI
 import SwiftData
+import SwiftUI
 
 struct MoodIpadView: View {
     @State private var selectedMood: MoodType = .normal
@@ -14,8 +14,8 @@ struct MoodIpadView: View {
     @State private var rotationAnimation = 0.0
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.modelContext) var modelContext
-    @EnvironmentObject var sessionController: SessionController
-    @EnvironmentObject var moodController: MoodController
+    @EnvironmentObject var sessionViewModel: SessionViewModel
+    @EnvironmentObject var moodViewModel: MoodViewModel
 
     private let moods: [MoodType] = [.unhappy, .sad, .normal, .good, .happy]
 
@@ -49,7 +49,9 @@ struct MoodIpadView: View {
                     .multilineTextAlignment(.center)
                     .opacity(pulseAnimation ? 0.8 : 1.0)
                     .animation(
-                        .easeInOut(duration: 2.0).repeatForever(autoreverses: true),
+                        .easeInOut(duration: 2.0).repeatForever(
+                            autoreverses: true
+                        ),
                         value: pulseAnimation
                     )
 
@@ -58,25 +60,46 @@ struct MoodIpadView: View {
                         .fill(selectedMood.color.opacity(0.2))
                         .frame(width: 260, height: 260)
                         .scaleEffect(pulseAnimation ? 1.1 : 1.0)
-                        .animation(.easeInOut(duration: 2.0).repeatForever(autoreverses: true), value: pulseAnimation)
+                        .animation(
+                            .easeInOut(duration: 2.0).repeatForever(
+                                autoreverses: true
+                            ),
+                            value: pulseAnimation
+                        )
 
                     Circle()
                         .fill(selectedMood.color.opacity(0.4))
                         .frame(width: 200, height: 200)
                         .scaleEffect(pulseAnimation ? 1.05 : 1.0)
-                        .animation(.easeInOut(duration: 1.5).repeatForever(autoreverses: true), value: pulseAnimation)
+                        .animation(
+                            .easeInOut(duration: 1.5).repeatForever(
+                                autoreverses: true
+                            ),
+                            value: pulseAnimation
+                        )
 
                     Circle()
                         .fill(selectedMood.color)
                         .frame(width: 160, height: 160)
-                        .shadow(color: selectedMood.color.opacity(0.6), radius: 20)
+                        .shadow(
+                            color: selectedMood.color.opacity(0.6),
+                            radius: 20
+                        )
                         .scaleEffect(pulseAnimation ? 1.02 : 1.0)
-                        .animation(.easeInOut(duration: 1.0).repeatForever(autoreverses: true), value: pulseAnimation)
+                        .animation(
+                            .easeInOut(duration: 1.0).repeatForever(
+                                autoreverses: true
+                            ),
+                            value: pulseAnimation
+                        )
 
                     Circle()
                         .fill(
                             RadialGradient(
-                                gradient: Gradient(colors: [Color.white.opacity(0.6), Color.white.opacity(0.2), Color.clear]),
+                                gradient: Gradient(colors: [
+                                    Color.white.opacity(0.6),
+                                    Color.white.opacity(0.2), Color.clear,
+                                ]),
                                 center: .topLeading,
                                 startRadius: 10,
                                 endRadius: 60
@@ -84,7 +107,12 @@ struct MoodIpadView: View {
                         )
                         .frame(width: 160, height: 160)
                         .rotationEffect(.degrees(rotationAnimation))
-                        .animation(.linear(duration: 8.0).repeatForever(autoreverses: false), value: rotationAnimation)
+                        .animation(
+                            .linear(duration: 8.0).repeatForever(
+                                autoreverses: false
+                            ),
+                            value: rotationAnimation
+                        )
                 }
                 .padding(.vertical, 20)
                 .onAppear {
@@ -97,34 +125,74 @@ struct MoodIpadView: View {
                         ForEach(moods, id: \.self) { mood in
                             VStack(spacing: 8) {
                                 Button(action: {
-                                    withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
+                                    withAnimation(
+                                        .spring(
+                                            response: 0.6,
+                                            dampingFraction: 0.8
+                                        )
+                                    ) {
                                         selectedMood = mood
                                     }
                                 }) {
                                     ZStack {
                                         if selectedMood == mood {
                                             Circle()
-                                                .stroke(mood.color, lineWidth: 3)
+                                                .stroke(
+                                                    mood.color,
+                                                    lineWidth: 3
+                                                )
                                                 .frame(width: 40, height: 40)
-                                                .scaleEffect(pulseAnimation ? 1.1 : 1.0)
-                                                .animation(.easeInOut(duration: 1.0).repeatForever(autoreverses: true), value: pulseAnimation)
+                                                .scaleEffect(
+                                                    pulseAnimation ? 1.1 : 1.0
+                                                )
+                                                .animation(
+                                                    .easeInOut(duration: 1.0)
+                                                        .repeatForever(
+                                                            autoreverses: true
+                                                        ),
+                                                    value: pulseAnimation
+                                                )
                                         }
 
                                         Circle()
                                             .fill(mood.color)
                                             .frame(width: 28, height: 28)
-                                            .shadow(color: mood.color.opacity(0.5), radius: selectedMood == mood ? 8 : 4)
+                                            .shadow(
+                                                color: mood.color.opacity(0.5),
+                                                radius: selectedMood == mood
+                                                    ? 8 : 4
+                                            )
                                     }
                                 }
                                 .scaleEffect(selectedMood == mood ? 1.2 : 1.0)
-                                .animation(.spring(response: 0.4, dampingFraction: 0.6), value: selectedMood)
+                                .animation(
+                                    .spring(
+                                        response: 0.4,
+                                        dampingFraction: 0.6
+                                    ),
+                                    value: selectedMood
+                                )
 
                                 Text(mood.title)
-                                    .foregroundColor(selectedMood == mood ? .white : .white.opacity(0.7))
+                                    .foregroundColor(
+                                        selectedMood == mood
+                                            ? .white : .white.opacity(0.7)
+                                    )
                                     .font(.callout)
-                                    .fontWeight(selectedMood == mood ? .semibold : .medium)
-                                    .scaleEffect(selectedMood == mood ? 1.1 : 1.0)
-                                    .animation(.spring(response: 0.4, dampingFraction: 0.6), value: selectedMood)
+                                    .fontWeight(
+                                        selectedMood == mood
+                                            ? .semibold : .medium
+                                    )
+                                    .scaleEffect(
+                                        selectedMood == mood ? 1.1 : 1.0
+                                    )
+                                    .animation(
+                                        .spring(
+                                            response: 0.4,
+                                            dampingFraction: 0.6
+                                        ),
+                                        value: selectedMood
+                                    )
                             }
                             .frame(maxWidth: .infinity)
                         }
@@ -135,7 +203,10 @@ struct MoodIpadView: View {
                         .fill(selectedMood.color.opacity(0.4))
                         .frame(height: 2)
                         .padding(.horizontal, 120)
-                        .animation(.easeInOut(duration: 0.5), value: selectedMood)
+                        .animation(
+                            .easeInOut(duration: 0.5),
+                            value: selectedMood
+                        )
                 }
 
                 Spacer()
@@ -143,9 +214,14 @@ struct MoodIpadView: View {
                 Button(action: {
                     presentationMode.wrappedValue.dismiss()
                     do {
-                        try moodController.logMood(moodName: selectedMood.title, for: sessionController.currentUser?.userId ?? -1)
+                        try moodViewModel.logMood(
+                            moodName: selectedMood.title,
+                            for: sessionViewModel.currentUser?.userId ?? -1
+                        )
                     } catch {
-                        print("Failed to log mood: \(error.localizedDescription)")
+                        print(
+                            "Failed to log mood: \(error.localizedDescription)"
+                        )
                     }
                 }) {
                     HStack {
@@ -170,9 +246,19 @@ struct MoodIpadView: View {
                         )
                     )
                     .clipShape(RoundedRectangle(cornerRadius: 20))
-                    .shadow(color: selectedMood.color.opacity(0.4), radius: 10, x: 0, y: 5)
+                    .shadow(
+                        color: selectedMood.color.opacity(0.4),
+                        radius: 10,
+                        x: 0,
+                        y: 5
+                    )
                     .scaleEffect(pulseAnimation ? 1.02 : 1.0)
-                    .animation(.easeInOut(duration: 2.0).repeatForever(autoreverses: true), value: pulseAnimation)
+                    .animation(
+                        .easeInOut(duration: 2.0).repeatForever(
+                            autoreverses: true
+                        ),
+                        value: pulseAnimation
+                    )
                 }
                 .padding(.horizontal, 100)
                 .padding(.bottom, 80)
@@ -182,6 +268,29 @@ struct MoodIpadView: View {
     }
 }
 
+enum MoodType: CaseIterable {
+    case unhappy, sad, normal, good, happy
+
+    var color: Color {
+        switch self {
+        case .unhappy: return Color.red
+        case .sad: return Color.blue
+        case .normal: return Color.purple
+        case .good: return Color.green
+        case .happy: return Color.yellow
+        }
+    }
+
+    var title: String {
+        switch self {
+        case .unhappy: return "Unhappy"
+        case .sad: return "Sad"
+        case .normal: return "Normal"
+        case .good: return "Good"
+        case .happy: return "Happy"
+        }
+    }
+}
 //#Preview {
 //    let dummySession = SessionController()
 //    dummySession.login(user: UserModel(userId: 1, username: "Calvin", password: "123"))
@@ -191,4 +300,3 @@ struct MoodIpadView: View {
 //        .environmentObject(MoodController())
 //        .modelContainer(for: [UserModel.self], inMemory: true)
 //}
-

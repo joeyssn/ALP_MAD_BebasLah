@@ -11,8 +11,8 @@ import SwiftData
 struct MoodLogIpadView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var sessionController: SessionController
-    @EnvironmentObject var moodController: MoodController
+    @EnvironmentObject var sessionViewModel: SessionViewModel
+    @EnvironmentObject var moodViewModel: MoodViewModel
 
     @State private var moods: [MoodModel] = []
     @State private var showMoodView = false
@@ -160,10 +160,21 @@ struct MoodLogIpadView: View {
 
     private func fetchMoods() {
         do {
-            moods = try moodController.getMoods(for: sessionController.currentUser?.userId ?? -1)
+            moods = try moodViewModel.getMoods(for: sessionViewModel.currentUser?.userId ?? -1)
         } catch {
             print("Failed to fetch moods: \(error.localizedDescription)")
         }
+    }
+}
+
+func colorForMood(_ mood: String) -> Color {
+    switch mood.lowercased() {
+    case "unhappy": return .red
+    case "sad": return .blue
+    case "normal": return .purple
+    case "good": return .green
+    case "happy": return .yellow
+    default: return .gray
     }
 }
 
