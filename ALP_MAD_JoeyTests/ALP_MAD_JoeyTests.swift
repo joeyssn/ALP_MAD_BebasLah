@@ -32,7 +32,6 @@ final class ALP_MAD_JoeyTests: XCTestCase {
 
         let registerResult = try userVM.register(username: username, password: password)
         XCTAssertTrue(registerResult)
-
         let loginResult = try userVM.login(username: username, password: password)
         XCTAssertNotNil(loginResult)
         XCTAssertEqual(loginResult?.username, username)

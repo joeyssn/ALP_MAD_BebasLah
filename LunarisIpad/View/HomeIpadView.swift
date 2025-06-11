@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct HomeIpadView: View {
-    @EnvironmentObject var session: SessionController
+    @EnvironmentObject var session: SessionViewModel
     @Environment(\.modelContext) private var context
 
     private var currentHour: Int {
@@ -179,7 +179,7 @@ struct HomeIpadView: View {
         username: "Calvin",
         password: "123"
     )
-    let dummySession = SessionController()
+    let dummySession = SessionViewModel()
     dummySession.login(user: dummyUser)
 
     return HomeIpadView()

@@ -14,8 +14,8 @@ struct MoodIpadView: View {
     @State private var rotationAnimation = 0.0
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.modelContext) var modelContext
-    @EnvironmentObject var sessionController: SessionController
-    @EnvironmentObject var moodController: MoodController
+    @EnvironmentObject var sessionViewModel: SessionViewModel
+    @EnvironmentObject var moodViewModel: MoodViewModel
 
     private let moods: [MoodType] = [.unhappy, .sad, .normal, .good, .happy]
 
@@ -143,7 +143,7 @@ struct MoodIpadView: View {
                 Button(action: {
                     presentationMode.wrappedValue.dismiss()
                     do {
-                        try moodController.logMood(moodName: selectedMood.title, for: sessionController.currentUser?.userId ?? -1)
+                        try moodViewModel.logMood(moodName: selectedMood.title, for: sessionViewModel.currentUser?.userId ?? -1)
                     } catch {
                         print("Failed to log mood: \(error.localizedDescription)")
                     }

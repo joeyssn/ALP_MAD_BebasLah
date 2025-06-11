@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ProfileIpadView: View {
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var session: SessionController
+    @EnvironmentObject var session: SessionViewModel
     @Environment(\.modelContext) private var context
 
     var body: some View {
@@ -248,5 +248,5 @@ struct ProfileMenuItemIpad: View {
 
 #Preview {
     ProfileIpadView()
-        .environmentObject(SessionController())
+        .environmentObject(SessionViewModel())
 }

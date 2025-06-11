@@ -74,6 +74,12 @@
 				Model/MoodModel.swift,
 				Model/ReminderModel.swift,
 				Model/UserModel.swift,
+				ViewModel/MeditationSessionViewModel.swift,
+				ViewModel/MeditationViewModel.swift,
+				ViewModel/MoodViewModel.swift,
+				ViewModel/NotificationViewModel.swift,
+				ViewModel/SessionViewModel.swift,
+				ViewModel/UserViewModel.swift,
 			);
 			target = BFAA68E22DF89134001A4E40 /* LunarisIpad */;
 		};
