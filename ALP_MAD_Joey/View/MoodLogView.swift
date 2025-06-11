@@ -12,8 +12,8 @@ struct MoodLogView: View {
     //EnvironmentObject di save utk global StateObject utk 1 page, ObserveObject rentan ke reset datanya kalo pindah page
     @Environment(\.modelContext) private var modelContext
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var sessionController: SessionController
-    @EnvironmentObject var moodController: MoodController
+    @EnvironmentObject var sessionViewModel: SessionViewModel
+    @EnvironmentObject var moodViewModel: MoodViewModel
     @State private var moods: [MoodModel] = []
     @State private var showMoodView = false
 
@@ -167,8 +167,8 @@ struct MoodLogView: View {
             isPresented: $showMoodView,
             onDismiss: {
                 do {
-                    moods = try moodController.getMoods(
-                        for: sessionController.currentUser?.userId ?? -1
+                    moods = try moodViewModel.getMoods(
+                        for: sessionViewModel.currentUser?.userId ?? -1
                     )
                 } catch {
                     print(
@@ -181,8 +181,8 @@ struct MoodLogView: View {
         }
         .onAppear {
             do {
-                moods = try moodController.getMoods(
-                    for: sessionController.currentUser?.userId ?? -1
+                moods = try moodViewModel.getMoods(
+                    for: sessionViewModel.currentUser?.userId ?? -1
                 )
             } catch {
                 print("Failed to fetch moods: \(error.localizedDescription)")

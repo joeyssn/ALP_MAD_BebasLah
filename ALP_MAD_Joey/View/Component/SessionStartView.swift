@@ -12,8 +12,8 @@ struct SessionStartView: View {
     @State private var elapsedSeconds: Int = 0
     @State private var playbackTimer: Timer?
 
-    @EnvironmentObject var meditationController: MeditationController
-    @EnvironmentObject var meditationSessionController: MeditationSessionController
+    @EnvironmentObject var meditationViewModel: MeditationViewModel
+    @EnvironmentObject var meditationSessionViewModel: MeditationSessionViewModel
 
     let card: MeditationCardModel
     let cardSession: MeditateSessionModel
@@ -24,7 +24,6 @@ struct SessionStartView: View {
                 .ignoresSafeArea()
 
             VStack {
-                // Navigation bar
                 HStack {
                     Button(action: {
                         presentationMode.wrappedValue.dismiss()
@@ -117,9 +116,9 @@ struct SessionStartView: View {
                     Button(action: {
                         isPaused.toggle()
                         if isPaused {
-                            meditationSessionController.pauseSound()
+                            meditationSessionViewModel.pauseSound()
                         } else {
-                            meditationSessionController.resumeSound()
+                            meditationSessionViewModel.resumeSound()
                         }
                     }) {
                         HStack {
@@ -143,14 +142,14 @@ struct SessionStartView: View {
             }
             .navigationBarHidden(true)
             .onAppear {
-                meditationSessionController.playSound(named: cardSession.soundFile)
+                meditationSessionViewModel.playSound(named: cardSession.soundFile)
                 isPaused = false
                 elapsedSeconds = 0       // reset when starting new session
                 startAnimations()
                 startPlaybackTimer()
             }
             .onDisappear {
-                meditationSessionController.stopSound()
+                meditationSessionViewModel.stopSound()
                 stopAnimations()
                 stopPlaybackTimer()
             }

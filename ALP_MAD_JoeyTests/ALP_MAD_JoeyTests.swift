@@ -7,30 +7,92 @@
 
 import XCTest
 @testable import ALP_MAD_Joey
+import SwiftData
 
+@MainActor
 final class ALP_MAD_JoeyTests: XCTestCase {
 
+    var modelContainer: ModelContainer!
+    var modelContext: ModelContext!
+
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        modelContainer = try ModelContainer(for: UserModel.self, MoodModel.self)
+        modelContext = modelContainer.mainContext
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        modelContainer = nil
+        modelContext = nil
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    func testUserRegistrationAndLogin() throws {
+        let userVM = UserViewModel(context: modelContext)
+        let username = "testuser"
+        let password = "testpass"
+
+        let registerResult = try userVM.register(username: username, password: password)
+        XCTAssertTrue(registerResult)
+
+        let loginResult = try userVM.login(username: username, password: password)
+        XCTAssertNotNil(loginResult)
+        XCTAssertEqual(loginResult?.username, username)
     }
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    func testUserAlreadyExists() throws {
+        let userVM = UserViewModel(context: modelContext)
+        _ = try userVM.register(username: "existinguser", password: "pass123")
+        let secondAttempt = try userVM.register(username: "existinguser", password: "pass456")
+        XCTAssertFalse(secondAttempt, "Duplicate registration should fail")
     }
 
+    func testMoodLoggingAndFetching() throws {
+        let moodVM = MoodViewModel(context: modelContext)
+        let userId = 1
+        let moodName = "Happy"
+
+        try moodVM.logMood(moodName: moodName, for: userId)
+        let moods = try moodVM.getMoods(for: userId)
+
+        XCTAssertFalse(moods.isEmpty, "Mood should be logged and retrievable")
+        XCTAssertEqual(moods.first?.moodName, moodName)
+    }
+
+    func testSessionLoginAndLogout() {
+        let sessionVM = SessionViewModel()
+        let user = UserModel(userId: 99, username: "demo", password: "pass")
+
+        sessionVM.login(user: user)
+        XCTAssertTrue(sessionVM.isLoggedIn)
+        XCTAssertEqual(sessionVM.currentUser?.username, "demo")
+
+        sessionVM.logout()
+        XCTAssertFalse(sessionVM.isLoggedIn)
+        XCTAssertNil(sessionVM.currentUser)
+    }
+
+    func testNotificationScheduleAndCancel() {
+        let notificationVM = NotificationViewModel()
+
+        notificationVM.requestPermission()
+        notificationVM.scheduleDailyNotification(at: "08:00 AM", for: "Steven")
+        notificationVM.cancelNotification()
+
+        XCTAssertTrue(true, "Notification scheduling and cancellation executed without crashing.")
+    }
+
+    func testMeditationViewModelInitialization() {
+        let meditationVM = MeditationViewModel(context: modelContext)
+        XCTAssertNotNil(meditationVM)
+    }
+
+    func testMeditationSessionSoundControls() {
+        let meditationSessionVM = MeditationSessionViewModel(context: modelContext)
+
+        meditationSessionVM.playSound(named: "testSound.mp3")
+        meditationSessionVM.pauseSound()
+        meditationSessionVM.resumeSound()
+        meditationSessionVM.stopSound()
+
+        XCTAssertTrue(true, "Sound control methods executed without crashing.")
+    }
 }

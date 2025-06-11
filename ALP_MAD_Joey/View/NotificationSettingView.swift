@@ -47,11 +47,11 @@ struct NotificationSettingsView: View {
                         set: { newValue in
                             if newValue {
                                 // Use NotificationController
-                                NotificationController.shared.requestAuthorization { granted in
+                                NotificationViewModel.shared.requestAuthorization { granted in
                                     if granted {
                                         reminderEnabled = true
                                         // Use NotificationController
-                                        NotificationController.shared.scheduleDailyMeditationReminder(timeString: reminderTime)
+                                        NotificationViewModel.shared.scheduleDailyMeditationReminder(timeString: reminderTime)
                                     } else {
                                         print("Notification permission denied by user.")
                                         showPermissionAlert = true
@@ -61,7 +61,7 @@ struct NotificationSettingsView: View {
                             } else {
                                 reminderEnabled = false
                                 // Use NotificationController
-                                NotificationController.shared.cancelMeditationReminder()
+                                NotificationViewModel.shared.cancelMeditationReminder()
                             }
                         }
                     )) {
@@ -112,16 +112,16 @@ struct NotificationSettingsView: View {
             if reminderEnabled {
                 print("Reminder time changed to \(newTimeValue), rescheduling...")
                 // Use NotificationController
-                NotificationController.shared.scheduleDailyMeditationReminder(timeString: newTimeValue)
+                NotificationViewModel.shared.scheduleDailyMeditationReminder(timeString: newTimeValue)
             }
         }
         .onAppear {
             if reminderEnabled {
                 // Use NotificationController
-                NotificationController.shared.requestAuthorization { granted in
+                NotificationViewModel.shared.requestAuthorization { granted in
                     if granted {
                         // Use NotificationController
-                        NotificationController.shared.scheduleDailyMeditationReminder(timeString: reminderTime)
+                        NotificationViewModel.shared.scheduleDailyMeditationReminder(timeString: reminderTime)
                     } else {
                         DispatchQueue.main.async {
                             reminderEnabled = false

@@ -10,7 +10,7 @@ import SwiftUI
 
 struct ProfileView: View {
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var session: SessionController
+    @EnvironmentObject var session: SessionViewModel
     @Environment(\.modelContext) private var context
 
     var body: some View {

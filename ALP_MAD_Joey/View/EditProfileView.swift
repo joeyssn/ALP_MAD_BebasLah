@@ -17,13 +17,13 @@ struct EditProfileView: View {
     @State private var draftUsername: String
     @State private var errorMessage: String?
 
-    private var userController: UserController
+    private var userViewModel: UserViewModel
 
     // Initializer for use in the app flow, receiving the modelContext
     init(user: UserModel, modelContext: ModelContext) {
         self.user = user
         _draftUsername = State(initialValue: user.username)
-        self.userController = UserController(context: modelContext)
+        self.userViewModel = UserViewModel(context: modelContext)
     }
     
     // Convenience initializer for previews, creates a temporary context
@@ -34,7 +34,7 @@ struct EditProfileView: View {
         // If not, UserController might not have a valid context.
         // A robust way is to ensure previews always get a container.
         let previewContainer = try! ModelContainer(for: UserModel.self, configurations: ModelConfiguration(isStoredInMemoryOnly: true))
-        self.userController = UserController(context: previewContainer.mainContext)
+        self.userViewModel = UserViewModel(context: previewContainer.mainContext)
     }
 
 
