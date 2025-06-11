@@ -1,13 +1,13 @@
 //
-//  NotificationSettingView.swift
+//  NotificationSettingIpadView.swift
 //  ALP_MAD_Joey
 //
-//  Created by Christianto Elvern Haryanto on 03/06/25.
+//  Created by Calvin Laiman on 11/06/25.
 //
 
 import SwiftUI
 
-struct NotificationSettingsView: View {
+struct NotificationSettingIpadView: View {
     @AppStorage("reminderEnabled") private var reminderEnabled = false
     @AppStorage("reminderTime") private var reminderTime = "08:00 AM"
     @Environment(\.presentationMode) private var presentationMode
@@ -27,31 +27,32 @@ struct NotificationSettingsView: View {
                     }) {
                         Image(systemName: "chevron.left")
                             .foregroundColor(.white)
-                            .font(.title2)
+                            .font(.title)
                     }
+
                     Spacer()
+
                     Text("Notifications")
                         .foregroundColor(.white)
-                        .font(.title2)
-                        .fontWeight(.semibold)
-                    Spacer()
-                    Spacer().frame(width: 28)
-                }
-                .padding(.horizontal)
-                .padding(.top, 50)
-                .padding(.bottom, 30)
+                        .font(.system(size: 28, weight: .semibold))
 
-                VStack(spacing: 20) {
+                    Spacer()
+
+                    Spacer().frame(width: 40)
+                }
+                .padding(.horizontal, 60)
+                .padding(.top, 40)
+                .padding(.bottom, 40)
+
+                VStack(spacing: 30) {
                     Toggle(isOn: Binding(
                         get: { reminderEnabled },
                         set: { newValue in
                             if newValue {
-                                // Use NotificationController
-                                NotificationViewModel.shared.requestAuthorization { granted in
+                                NotificationController.shared.requestAuthorization { granted in
                                     if granted {
                                         reminderEnabled = true
-                                        // Use NotificationController
-                                        NotificationViewModel.shared.scheduleDailyMeditationReminder(timeString: reminderTime)
+                                        NotificationController.shared.scheduleDailyMeditationReminder(timeString: reminderTime)
                                     } else {
                                         print("Notification permission denied by user.")
                                         showPermissionAlert = true
@@ -60,21 +61,23 @@ struct NotificationSettingsView: View {
                                 }
                             } else {
                                 reminderEnabled = false
-                                // Use NotificationController
-                                NotificationViewModel.shared.cancelMeditationReminder()
+                                NotificationController.shared.cancelMeditationReminder()
                             }
                         }
                     )) {
                         Text("Enable Daily Reminder")
                             .foregroundColor(.white)
-                            .font(.headline)
+                            .font(.title2)
+                            .fontWeight(.medium)
                     }
                     .toggleStyle(SwitchToggleStyle(tint: .purple))
 
                     if reminderEnabled {
-                        VStack(spacing: 10) {
+                        VStack(spacing: 16) {
                             Text("Reminder Time")
                                 .foregroundColor(.white)
+                                .font(.headline)
+
                             DatePicker("",
                                        selection: Binding(
                                         get: {
@@ -91,37 +94,35 @@ struct NotificationSettingsView: View {
                                 .labelsHidden()
                                 .datePickerStyle(WheelDatePickerStyle())
                                 .colorScheme(.dark)
+                                .frame(maxWidth: 300)
                         }
                     }
                 }
-                .padding()
+                .padding(40)
                 .background(
-                    RoundedRectangle(cornerRadius: 12)
-                        .fill(Color.white.opacity(0.1))
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(Color.white.opacity(0.08))
                         .overlay(
-                            RoundedRectangle(cornerRadius: 12)
+                            RoundedRectangle(cornerRadius: 16)
                                 .stroke(Color.white.opacity(0.2), lineWidth: 1)
                         )
                 )
-                .padding(.horizontal)
+                .padding(.horizontal, 120)
+
                 Spacer()
             }
         }
         .navigationBarHidden(true)
         .onChange(of: reminderTime) { newTimeValue in
             if reminderEnabled {
-                print("Reminder time changed to \(newTimeValue), rescheduling...")
-                // Use NotificationController
-                NotificationViewModel.shared.scheduleDailyMeditationReminder(timeString: newTimeValue)
+                NotificationController.shared.scheduleDailyMeditationReminder(timeString: newTimeValue)
             }
         }
         .onAppear {
             if reminderEnabled {
-                // Use NotificationController
-                NotificationViewModel.shared.requestAuthorization { granted in
+                NotificationController.shared.requestAuthorization { granted in
                     if granted {
-                        // Use NotificationController
-                        NotificationViewModel.shared.scheduleDailyMeditationReminder(timeString: reminderTime)
+                        NotificationController.shared.scheduleDailyMeditationReminder(timeString: reminderTime)
                     } else {
                         DispatchQueue.main.async {
                             reminderEnabled = false
@@ -132,17 +133,18 @@ struct NotificationSettingsView: View {
         }
         .alert("Permission Denied", isPresented: $showPermissionAlert) {
             Button("Open Settings", action: {
-                if let url = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(url) {
+                if let url = URL(string: UIApplication.openSettingsURLString),
+                   UIApplication.shared.canOpenURL(url) {
                     UIApplication.shared.open(url)
                 }
             })
             Button("Cancel", role: .cancel) {}
         } message: {
-            Text("To enable reminders, please allow notification permissions in your iPhone's Settings app.")
+            Text("To enable reminders, please allow notification permissions in your iPad's Settings app.")
         }
     }
 }
 
 #Preview {
-    NotificationSettingsView()
+    NotificationSettingIpadView()
 }

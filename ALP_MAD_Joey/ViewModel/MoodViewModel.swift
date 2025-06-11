@@ -8,7 +8,7 @@
 import Foundation
 import SwiftData
 
-class MoodController: ObservableObject {
+class MoodViewModel: ObservableObject {
     let context: ModelContext
 
     init(context: ModelContext) {

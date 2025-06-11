@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct StartView: View {
-    @EnvironmentObject var session: SessionController
+    @EnvironmentObject var session: SessionViewModel
     var body: some View {
         NavigationStack {
             if session.isLoggedIn {
