@@ -12,7 +12,6 @@ struct SessionStartView: View {
     @State private var elapsedSeconds: Int = 0
     @State private var playbackTimer: Timer?
 
-    @EnvironmentObject var meditationViewModel: MeditationViewModel
     @EnvironmentObject var meditationSessionViewModel: MeditationSessionViewModel
 
     let card: MeditationCardModel

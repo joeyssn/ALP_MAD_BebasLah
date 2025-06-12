@@ -29,7 +29,7 @@ struct LoadingIpadView: View {
                     .animation(.easeOut(duration: 1.2), value: logoOpacity)
                     .animation(.easeOut(duration: 1.2), value: logoOffset)
 
-                Text("Lunaris")
+                Text("Lunara")
                     .font(.system(size: 70, weight: .bold))
                     .overlay(
                         LinearGradient(

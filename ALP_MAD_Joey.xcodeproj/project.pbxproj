@@ -68,7 +68,6 @@
 				Model/MeditateSessionModel.swift,
 				Model/MeditationCardModel.swift,
 				Model/MoodModel.swift,
-				Model/ReminderModel.swift,
 				Model/UserModel.swift,
 				SoundManager.swift,
 			);
@@ -81,7 +80,6 @@
 				Model/MeditateSessionModel.swift,
 				Model/MeditationCardModel.swift,
 				Model/MoodModel.swift,
-				Model/ReminderModel.swift,
 				Model/UserModel.swift,
 				SoundManager.swift,
 			);

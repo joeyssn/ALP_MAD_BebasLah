@@ -30,7 +30,7 @@ struct LoadingView: View {
                     .animation(.easeOut(duration: 1.2), value: logoOffset)
                     
 
-                Text("Lunaris")
+                Text("Lunara")
                     .font(.system(size: 50, weight: .bold))
                     .overlay(
                         LinearGradient(

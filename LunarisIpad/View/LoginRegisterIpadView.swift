@@ -35,7 +35,7 @@ struct LoginRegisterIpadView: View {
                         .font(.system(size: 35, weight: .bold))
                         .foregroundColor(.white)
 
-                    Text("Lunaris")
+                    Text("Lunara")
                         .font(.system(size: 35, weight: .bold))
                         .overlay(
                             LinearGradient(

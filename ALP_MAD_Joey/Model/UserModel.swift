@@ -14,7 +14,6 @@ class UserModel {
     var username: String
     var password: String
     @Relationship var moods: [MoodModel] = []
-    @Relationship var reminder: [ReminderModel] = []
     @Relationship var meditation: [MeditateSessionModel] = []
     
     init(userId: Int, username: String, password: String) {

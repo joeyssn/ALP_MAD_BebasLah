@@ -13,7 +13,6 @@ struct ALP_MAD_JoeyApp: App {
     @StateObject private var session = SessionViewModel()
     @StateObject private var userViewModel: UserViewModel
     @StateObject private var moodViewModel: MoodViewModel
-    @StateObject private var meditationViewModel: MeditationViewModel
     @StateObject private var meditationSessionViewModel: MeditationSessionViewModel
 
     @State private var isLoading = true
@@ -28,7 +27,6 @@ struct ALP_MAD_JoeyApp: App {
 
         _userViewModel = StateObject(wrappedValue: UserViewModel(context: container.mainContext))
         _moodViewModel = StateObject(wrappedValue: MoodViewModel(context: container.mainContext))
-        _meditationViewModel = StateObject(wrappedValue: MeditationViewModel(context: container.mainContext))
         _meditationSessionViewModel = StateObject(wrappedValue: MeditationSessionViewModel(context: container.mainContext))
     }
 
@@ -44,7 +42,6 @@ struct ALP_MAD_JoeyApp: App {
             .environmentObject(session)
             .environmentObject(userViewModel)
             .environmentObject(moodViewModel)
-            .environmentObject(meditationViewModel)
             .environmentObject(meditationSessionViewModel)
             .modelContainer(sharedModelContainer)
             .onAppear {
